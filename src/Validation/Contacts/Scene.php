@@ -11,4 +11,6 @@ interface Scene
     public function extend(array|string $rule): self;
 
     public function hasRules(): bool;
+
+    public function hasScene(): bool;
 }

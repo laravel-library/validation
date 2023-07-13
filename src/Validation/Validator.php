@@ -2,27 +2,30 @@
 
 namespace Dingo\Validation\Validation;
 
-use Dingo\Validation\Parameters\Contacts\Parameter;
+use Closure;
 use Dingo\Validation\Parameters\FormParameter;
 use Dingo\Validation\Validation\Contacts\Scene;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\Contacts\Validatable;
+use Dingo\Validation\Parameters\Contacts\Parameter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\Validator as Factory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 abstract class Validator extends FormRequest implements Validatable, Scene
 {
 
-    protected Scene $scene;
+    protected readonly Store $store;
 
-    protected Store $store;
+    protected ?string $scene = null;
+
+    protected array $extends = [];
 
     private bool $autoValidate;
 
     public function __construct(
-        Scene $scene,
         Store $store,
         array $query = [],
         array $request = [],
@@ -34,7 +37,6 @@ abstract class Validator extends FormRequest implements Validatable, Scene
         bool  $autoValidate = true
     )
     {
-        $this->scene = $scene;
 
         $this->store = $store;
 
@@ -61,11 +63,6 @@ abstract class Validator extends FormRequest implements Validatable, Scene
         $formData = $this->store->isEmpty() ? $formData : $this->store->merge($formData);
 
         return new FormParameter($formData);
-    }
-
-    public function extend(array|string $rule): Scene
-    {
-        return $this->scene->extend($rule);
     }
 
     /**
@@ -97,35 +94,119 @@ abstract class Validator extends FormRequest implements Validatable, Scene
         return $instance;
     }
 
-    private function prepareRules(): array
+    final public function validator(\Illuminate\Validation\Factory $factory): \Illuminate\Validation\Validator
+    {
+        return $factory->make(
+            $this->validationData(),
+            $this->prepareValidateRules(),
+            $this->messages(),
+            $this->attributes()
+        );
+    }
+
+    private function prepareValidateRules(): array
     {
         $rules = $this->rules();
 
-        if (!empty($this->extendRules)) {
-            foreach ($this->extendRules as $extend) {
-                if (method_exists($this, $extendRules = "{$extend}Rules")) {
-                    $rules = array_merge($rules, $this->{$extendRules}());
-                }
-            }
+        if ($this->hasRules()) {
+            $rules = array_merge($rules, $this->getExtendRules());
         }
 
-        $scenes = $this->replace ? $this->scenes() : $this->scenes;
+        if (!$this->hasScene()) {
+            return $rules;
+        }
 
-        if ($this->currentScene && isset($scenes[$this->currentScene])) {
-            $sceneFields = is_array($scenes[$this->currentScene])
-                ? $scenes[$this->currentScene]
-                : explode(',', $scenes[$this->currentScene]);
-
-            return array_reduce($sceneFields, function (mixed $carry, $field) use ($rules) {
-                if (array_key_exists($field, $rules)) {
-                    $carry[$field] = $rules[$field];
-                }
-
-                return $carry;
-            }, []);
+        if ($this->sceneExists()) {
+            return $this->getNewRules();
         }
 
         return $rules;
+    }
+
+    private function getExtendRules(): array
+    {
+        return array_reduce($this->extends, function (array $extends, string $extend) {
+
+            if (method_exists($this, "{$extend}Rules")) {
+                $extends = array_merge($extends, $this->{"{$extend}Rules"}());
+            }
+
+            return $extends;
+        }, []);
+    }
+
+    private function sceneExists(): bool
+    {
+        return isset($this->scenes()[$this->scene]);
+    }
+
+    protected function getNewRules(): array
+    {
+        return array_reduce($this->resolveAttributes(), $this->combine(), []);
+    }
+
+    private function combine(): Closure
+    {
+        return function (array $newRules, string $attribute): array {
+            if (array_key_exists($attribute, $this->rules())) {
+                $newRules[$attribute] = $this->rules()[$attribute];
+            }
+
+            return $newRules;
+        };
+    }
+
+    private function resolveAttributes(): array
+    {
+        $scene = $this->scenes()[$this->scene];
+
+        return match (true) {
+            is_string($scene) => explode(',', $scene),
+            default           => $scene
+        };
+    }
+
+    public function withScene(string $name): Scene
+    {
+        $this->scene = $name;
+
+        return $this;
+    }
+
+    public function extend(array|string $rule): Scene
+    {
+        if (is_array($rule)) {
+            $this->extends = $this->filter($rule);
+        }
+
+        if (is_string($rule)) {
+            $this->extends[] = Str::camel($rule);
+        }
+
+        return $this;
+    }
+
+    protected function filter(array $rules): array
+    {
+        return array_merge(
+            $this->extends,
+            array_map(fn(string $rule) => Str::camel($rule), $rules),
+        );
+    }
+
+    public function hasRules(): bool
+    {
+        return !empty($this->extends);
+    }
+
+    public function hasScene(): bool
+    {
+        return !is_null($this->scene);
+    }
+
+    public function scenes(): array
+    {
+        return [];
     }
 
     abstract public function rules(): array;
