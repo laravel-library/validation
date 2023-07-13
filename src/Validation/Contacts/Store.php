@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Contacts;
+namespace Dingo\Validation\Validation\Contacts;
 
 interface Store
 {

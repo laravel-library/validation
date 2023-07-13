@@ -2,11 +2,11 @@
 
 namespace Dingo\Validation\Validation;
 
-use Dingo\Validation\Contacts\Parameter;
-use Dingo\Validation\Contacts\Scene;
-use Dingo\Validation\Contacts\Store;
-use Dingo\Validation\Contacts\Validatable;
+use Dingo\Validation\Parameters\Contacts\Parameter;
 use Dingo\Validation\Parameters\FormParameter;
+use Dingo\Validation\Validation\Contacts\Scene;
+use Dingo\Validation\Validation\Contacts\Store;
+use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\Validator as Factory;
 use Illuminate\Foundation\Http\FormRequest;

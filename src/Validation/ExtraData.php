@@ -2,7 +2,7 @@
 
 namespace Dingo\Validation\Validation;
 
-use Dingo\Validation\Contacts\Store;
+use Dingo\Validation\Validation\Contacts\Store;
 
 final class ExtraData implements Store
 {

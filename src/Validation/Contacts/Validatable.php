@@ -1,6 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Contacts;
+namespace Dingo\Validation\Validation\Contacts;
+
+use Dingo\Validation\Parameters\Contacts\Parameter;
 
 interface Validatable
 {

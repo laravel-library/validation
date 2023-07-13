@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Contacts;
+namespace Dingo\Validation\Parameters\Contacts;
 
 use Closure;
 

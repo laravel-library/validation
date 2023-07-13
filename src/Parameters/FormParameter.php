@@ -3,7 +3,7 @@
 namespace Dingo\Validation\Parameters;
 
 use Closure;
-use Dingo\Validation\Contacts\Parameter;
+use Dingo\Validation\Parameters\Contacts\Parameter;
 
 final class FormParameter implements Parameter
 {

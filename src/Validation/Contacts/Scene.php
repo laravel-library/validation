@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Contacts;
+namespace Dingo\Validation\Validation\Contacts;
 
 interface Scene
 {
@@ -9,4 +9,6 @@ interface Scene
     public function withScene(string $name): self;
 
     public function extend(array|string $rule): self;
+
+    public function hasRules(): bool;
 }

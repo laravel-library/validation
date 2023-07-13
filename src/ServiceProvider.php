@@ -2,10 +2,10 @@
 
 namespace Dingo\Validation;
 
-use Dingo\Validation\Contacts\Scene;
-use Dingo\Validation\Contacts\Store;
 use Dingo\Validation\Validation\ExtraData;
 use Dingo\Validation\Validation\ValidateScene;
+use Dingo\Validation\Validation\Contacts\Scene;
+use Dingo\Validation\Validation\Contacts\Store;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
