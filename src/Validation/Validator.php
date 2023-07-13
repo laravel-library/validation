@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dingo\Validation\Validation;
 
 use Dingo\Validation\Parameters\Contacts\ParameterFactory;

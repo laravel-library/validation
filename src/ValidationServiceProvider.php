@@ -2,19 +2,27 @@
 
 namespace Dingo\Validation;
 
+use Dingo\Validation\Commands\ValidatorCommand;
 use Dingo\Validation\Parameters\Contacts\ParameterFactory;
 use Dingo\Validation\Parameters\Generator;
 use Dingo\Validation\Validation\ExtraData;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\Validator;
+use Illuminate\Support\ServiceProvider;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+class ValidationServiceProvider extends ServiceProvider
 {
+    protected array $commands = [
+        ValidatorCommand::class,
+    ];
+
     public function boot(): void
     {
         $this->bindingSingle();
 
         $this->registerDepends();
+
+        $this->commands($this->commands);
     }
 
     protected function bindingSingle(): void
