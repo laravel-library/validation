@@ -1,0 +1,28 @@
+{
+  "name": "xgbnl/validator",
+  "description": "laravel validator,support scene validate.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Dingo\\Validation\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.2"
+  },
+  "require-dev": {
+    "illuminate/validation": "^10.15",
+    "illuminate/support": "^10.15",
+    "illuminate/http": "^10.15",
+    "laravel/framework": "^10.15"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Dingo\\Validation\\ServiceProvider"
+      ]
+    }
+  }
+}
