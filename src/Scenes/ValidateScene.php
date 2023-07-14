@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Dingo\Validation\Scenes;
 
+use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Validation\Contacts\Validatable;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Str;
 
 final class ValidateScene implements Scene
 {
-    protected readonly Container $app;
 
+    protected Factory $factory;
     protected ?string $scene = null;
 
     protected array $rules = [];
 
-    public function __construct(Container $app)
+    public function __construct(Factory $factory)
     {
-        $this->app = $app;
+        $this->factory = $factory;
     }
 
     public function hasRule(): bool
@@ -36,7 +36,7 @@ final class ValidateScene implements Scene
     {
         $this->scene = $scene;
 
-
+        return $this->factory->make($this);
     }
 
     public function withRule(array|string $rule): Validatable
@@ -49,6 +49,7 @@ final class ValidateScene implements Scene
             $this->extendRules($rule);
         }
 
+        return $this->factory->make($this);
     }
 
     protected function extendRule(string $rule): void

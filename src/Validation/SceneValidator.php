@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Dingo\Validation\Validation;
 
-use Dingo\Validation\Parameters\Contacts\ParameterFactory;
+use Dingo\Validation\Factory\Contacts\Factory;
+use Dingo\Validation\Factory\ParameterFactory;
+use Dingo\Validation\Parameters\Contacts\Parameter;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Parameters\Contacts\Parameter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -18,7 +19,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
     protected readonly Store $store;
 
-    protected readonly ParameterFactory $factory;
+    protected readonly Factory $factory;
 
     private bool $autoValidate;
 
@@ -62,7 +63,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
         $formData = $this->store->isEmpty() ? $formData : $this->store->merge($formData);
 
-        return $this->factory->parameter($formData);
+        return $this->factory->make($formData);
     }
 
     /**

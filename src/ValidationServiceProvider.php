@@ -3,11 +3,14 @@
 namespace Dingo\Validation;
 
 use Dingo\Validation\Commands\ValidatorCommand;
-use Dingo\Validation\Parameters\Contacts\ParameterFactory;
-use Dingo\Validation\Parameters\Generator;
-use Dingo\Validation\Validation\ExtraData;
+use Dingo\Validation\Factory\Contacts\Factory;
+use Dingo\Validation\Factory\ParameterFactory;
+use Dingo\Validation\Scenes\Contacts\Scene;
+use Dingo\Validation\Scenes\ValidateScene;
 use Dingo\Validation\Validation\Contacts\Store;
+use Dingo\Validation\Validation\ExtraData;
 use Dingo\Validation\Validation\SceneValidator;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -29,7 +32,7 @@ class ValidationServiceProvider extends ServiceProvider
     {
         $this->app->bind(Store::class, fn() => new ExtraData());
 
-        $this->app->bind(ParameterFactory::class, fn() => new Generator());
+        $this->app->bind(Scene::class, fn(Container $app) => new ValidateScene());
     }
 
     protected function registerDepends(): void
@@ -39,7 +42,7 @@ class ValidationServiceProvider extends ServiceProvider
             ->give(Store::class);
 
         $this->app->when(SceneValidator::class)
-            ->needs(ParameterFactory::class)
+            ->needs(Factory::class)
             ->give(ParameterFactory::class);
     }
 }
