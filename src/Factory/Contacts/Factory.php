@@ -4,5 +4,5 @@ namespace Dingo\Validation\Factory\Contacts;
 
 interface Factory
 {
-    public function make(mixed $values): mixed;
+    public function make(): mixed;
 }

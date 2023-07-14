@@ -15,7 +15,7 @@ final readonly class ValidatorFactory implements Factory
         $this->container = $container;
     }
 
-    public function make(mixed $values): Validatable
+    public function make(mixed $values = null): Validatable
     {
 
     }

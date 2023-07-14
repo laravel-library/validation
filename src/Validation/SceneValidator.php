@@ -53,17 +53,16 @@ abstract class SceneValidator extends FormRequest implements Validatable
         return $this;
     }
 
-    /**
-     * @throws AuthorizationException
-     * @throws ValidationException
-     */
     public function validateForm(): Parameter
+    {
+        return $this->factory->make();
+    }
+
+    public function validateRaw(): array
     {
         $formData = $this->resolveValidator()->validated();
 
-        $formData = $this->store->isEmpty() ? $formData : $this->store->merge($formData);
-
-        return $this->factory->make($formData);
+        return $this->store->isEmpty() ? $formData : $this->store->merge($formData);
     }
 
     /**

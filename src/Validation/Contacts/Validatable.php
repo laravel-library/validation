@@ -15,4 +15,6 @@ interface Validatable
     public function extra(array $values): self;
 
     public function validateForm(): Parameter;
+
+    public function validateRaw(): array;
 }

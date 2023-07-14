@@ -13,6 +13,7 @@ final class ValidateScene implements Scene
 {
 
     protected Factory $factory;
+
     protected ?string $scene = null;
 
     protected array $rules = [];
@@ -36,7 +37,7 @@ final class ValidateScene implements Scene
     {
         $this->scene = $scene;
 
-        return $this->factory->make($this);
+        return $this->factory->make();
     }
 
     public function withRule(array|string $rule): Validatable
@@ -49,7 +50,7 @@ final class ValidateScene implements Scene
             $this->extendRules($rule);
         }
 
-        return $this->factory->make($this);
+        return $this->factory->make();
     }
 
     protected function extendRule(string $rule): void
