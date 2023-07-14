@@ -7,7 +7,7 @@ use Dingo\Validation\Parameters\Contacts\ParameterFactory;
 use Dingo\Validation\Parameters\Generator;
 use Dingo\Validation\Validation\ExtraData;
 use Dingo\Validation\Validation\Contacts\Store;
-use Dingo\Validation\Validation\Validator;
+use Dingo\Validation\Validation\SceneValidator;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -34,11 +34,11 @@ class ValidationServiceProvider extends ServiceProvider
 
     protected function registerDepends(): void
     {
-        $this->app->when(Validator::class)
+        $this->app->when(SceneValidator::class)
             ->needs(Store::class)
             ->give(Store::class);
 
-        $this->app->when(Validator::class)
+        $this->app->when(SceneValidator::class)
             ->needs(ParameterFactory::class)
             ->give(ParameterFactory::class);
     }

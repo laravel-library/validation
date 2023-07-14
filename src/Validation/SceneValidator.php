@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Dingo\Validation\Validation;
 
 use Dingo\Validation\Parameters\Contacts\ParameterFactory;
-use Dingo\Validation\Validation\Contacts\Scene;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Dingo\Validation\Parameters\Contacts\Parameter;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Contracts\Validation\Validator as Factory;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-abstract class Validator extends FormRequest implements Validatable, Scene
+abstract class SceneValidator extends FormRequest implements Validatable
 {
-    use SceneTrait;
 
     protected readonly Store $store;
 
@@ -82,7 +80,7 @@ abstract class Validator extends FormRequest implements Validatable, Scene
      * @throws AuthorizationException
      * @throws ValidationException
      */
-    private function resolveValidator(): Factory
+    private function resolveValidator(): Validator
     {
         if (!$this->passesAuthorization()) {
             $this->failedAuthorization();
@@ -99,6 +97,11 @@ abstract class Validator extends FormRequest implements Validatable, Scene
     public function scenes(): array
     {
         return [];
+    }
+
+    public function hasRule(string $attribute): bool
+    {
+        return array_key_exists($attribute, $this->rules());
     }
 
     abstract public function rules(): array;
