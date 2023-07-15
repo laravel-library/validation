@@ -12,6 +12,8 @@ interface Scene
 
     public function replaceRules(Validatable $validatable): array;
 
+    public function merge(array $rules): array;
+
     public function hasRule(): bool;
 
     public function hasScene(): bool;

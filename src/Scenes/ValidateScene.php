@@ -90,4 +90,23 @@ final class ValidateScene implements Scene
             ? explode(',', $attributes)
             : $attributes;
     }
+
+    public function merge(array $rules): array
+    {
+        return array_merge($rules, $this->getRules());
+    }
+
+    protected function getRules(): array
+    {
+        return array_reduce($this->rules, function (array $extendRules, string $method): array {
+
+            $ruleMethod = "{$method}Rules";
+
+            if (method_exists($this, $ruleMethod)) {
+                $extendRules = array_merge($extendRules, $this->{$ruleMethod}());
+            }
+
+            return $extendRules;
+        }, []);
+    }
 }
