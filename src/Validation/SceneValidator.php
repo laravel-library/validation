@@ -68,7 +68,6 @@ abstract class SceneValidator extends FormRequest implements Validatable
         return $this->store->isEmpty() ? $formData : $this->store->merge($formData);
     }
 
-
     final public function validateResolved(): void
     {
         if ($this->autoValidate) {

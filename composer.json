@@ -8,7 +8,12 @@
       "Dingo\\Validation\\": "src/"
     }
   },
-  "minimum-stability": "stable",
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
   "require": {
     "php": "^8.2"
   },
@@ -16,7 +21,9 @@
     "illuminate/validation": "^10.15",
     "illuminate/support": "^10.15",
     "illuminate/http": "^10.15",
-    "laravel/framework": "^10.15"
+    "laravel/framework": "^10.15",
+    "xgbnl/dingo": "dev-main",
+    "phpunit/phpunit": "^10.2"
   },
   "extra": {
     "laravel": {

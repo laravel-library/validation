@@ -5,6 +5,7 @@ namespace Dingo\Validation;
 use Dingo\Validation\Commands\ValidatorCommand;
 use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Factory\ParameterFactory;
+use Dingo\Validation\Factory\ValidatorFactory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\ValidateScene;
 use Dingo\Validation\Validation\Contacts\Store;
@@ -30,17 +31,13 @@ class ValidationServiceProvider extends ServiceProvider
 
     protected function bindingSingle(): void
     {
-        $this->app->bind(Store::class, fn() => new ExtraData());
+        $this->app->singleton(Store::class, fn() => new ExtraData());
 
-        $this->app->bind(Scene::class, fn(Container $app) => new ValidateScene());
+        $this->app->singleton(Scene::class, fn(Container $app) => new ValidateScene(new ValidatorFactory($app)));
     }
 
     protected function registerDepends(): void
     {
-        $this->app->when(SceneValidator::class)
-            ->needs(Store::class)
-            ->give(Store::class);
-
         $this->app->when(SceneValidator::class)
             ->needs(Factory::class)
             ->give(ParameterFactory::class);
