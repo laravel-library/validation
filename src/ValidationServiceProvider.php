@@ -13,6 +13,7 @@ use Dingo\Validation\Scenes\ValidateScene;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\ExtraData;
 use Dingo\Validation\Validation\SceneValidator;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class ValidationServiceProvider extends ServiceProvider
         ValidatorCommand::class,
     ];
 
-    public function boot(): void
+    public function register(): void
     {
         $this->bindingSingle();
 
@@ -35,6 +36,7 @@ class ValidationServiceProvider extends ServiceProvider
         $this->app->singleton(Store::class, fn() => new ExtraData());
 
         $this->app->singleton(Scene::class, ValidateScene::class);
+
     }
 
     protected function registerDepends(): void
@@ -43,12 +45,8 @@ class ValidationServiceProvider extends ServiceProvider
             ->needs(Factory::class)
             ->give(ParameterFactory::class);
 
-        $this->app->when(ValidatorFactory::class)
-            ->needs(Guessable::class)
-            ->give(ControllerGuesser::class);
-
         $this->app->when(ValidateScene::class)
             ->needs(Factory::class)
-            ->give(ValidatorFactory::class);
+            ->give(fn(Application $app) => new ValidatorFactory($app,new ControllerGuesser()));
     }
 }
