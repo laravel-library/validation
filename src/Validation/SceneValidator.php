@@ -112,7 +112,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
     private function prepareValidateRules(): array
     {
         $rules = $this->scene->hasRule()
-            ? $this->scene->merge($this->rules())
+            ? $this->scene->merge($this)
             : $this->rules();
 
         return $this->scene->hasScene()

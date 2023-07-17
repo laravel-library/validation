@@ -9,7 +9,7 @@ use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Support\Str;
 
-final class ValidateScene implements Scene
+final class SceneManager implements Scene
 {
 
     protected Factory $factory;
@@ -91,19 +91,19 @@ final class ValidateScene implements Scene
             : $attributes;
     }
 
-    public function merge(array $rules): array
+    public function merge(Validatable $validatable): array
     {
-        return array_merge($rules, $this->getRules());
+        return array_merge($validatable->rules(), $this->getRules($validatable));
     }
 
-    protected function getRules(): array
+    protected function getRules(Validatable $validatable): array
     {
-        return array_reduce($this->rules, function (array $extendRules, string $method): array {
+        return array_reduce($this->rules, function (array $extendRules, string $method) use ($validatable): array {
 
             $ruleMethod = "{$method}Rules";
 
-            if (method_exists($this, $ruleMethod)) {
-                $extendRules = array_merge($extendRules, $this->{$ruleMethod}());
+            if (method_exists($validatable, $ruleMethod)) {
+                $extendRules = array_merge($extendRules, $validatable->{$ruleMethod}());
             }
 
             return $extendRules;
