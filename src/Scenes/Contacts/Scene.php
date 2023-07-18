@@ -10,9 +10,9 @@ interface Scene
 
     public function withRule(array|string $rule): Validatable;
 
-    public function replaceRules(Validatable $validatable): array;
+    public function replaceRules(): array;
 
-    public function merge(Validatable $validatable): array;
+    public function merge(): array;
 
     public function hasRule(): bool;
 

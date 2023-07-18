@@ -2,19 +2,18 @@
 
 namespace Dingo\Validation;
 
+use Dingo\Support\Guesser\Contacts\Guessable;
 use Dingo\Validation\Boundary\Guesses\ControllerGuesser;
 use Dingo\Validation\Commands\ValidatorCommand;
 use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\ParameterFactory;
-use Dingo\Validation\Factory\ValidatorFactory;
+use Dingo\Validation\Factory\SceneFactory;
+use Dingo\Validation\Factory\ValidatableFactory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\SceneManager;
 use Dingo\Validation\Validation\Contacts\Store;
-use Dingo\Validation\Validation\Contacts\Validatable;
 use Dingo\Validation\Validation\ExtraData;
-use Dingo\Validation\Validation\SceneValidator;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
 {
@@ -24,34 +23,21 @@ class ValidationServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->bindingSingle();
-
-        $this->registerDepends();
+        $this->registerSingle();
 
         $this->commands($this->commands);
     }
 
-    protected function bindingSingle(): void
+    protected function registerSingle(): void
     {
-        $this->app->bind(Validatable::class, SceneValidator::class);
-    }
+        $this->app->singleton(Store::class, new ExtraData());
 
-    protected function registerDepends(): void
-    {
-        $this->app->when(SceneManager::class)
-            ->needs(Factory::class)
-            ->give(fn(Container $app) => new ValidatorFactory($app, new ControllerGuesser()));
+        $this->app->bind(Scene::class, SceneManager::class);
 
-        $this->app->when(SceneValidator::class)
-            ->needs(Factory::class)
-            ->give(fn(Container $app) => new ParameterFactory($app));
+        $this->app->when(ValidatableFactory::class)
+            ->needs(Guessable::class)
+            ->give(ControllerGuesser::class);
 
-        $this->app->when(SceneValidator::class)
-            ->needs(Store::class)
-            ->give(fn() => new ExtraData());
-
-        $this->app->when(SceneValidator::class)
-            ->needs(Scene::class)
-            ->give(SceneManager::class);
+        $this->app->singleton(Factory::class, fn(Container $container) => new SceneFactory($container));
     }
 }

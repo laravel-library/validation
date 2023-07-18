@@ -2,10 +2,9 @@
 
 namespace Dingo\Validation\Factory;
 
+use Dingo\Validation\Parameters\FormParameter;
 use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Parameters\Contacts\Parameter;
-use Dingo\Validation\Parameters\FormParameter;
-use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class ParameterFactory implements Factory
@@ -17,13 +16,8 @@ final readonly class ParameterFactory implements Factory
         $this->container = $app;
     }
 
-    public function make(): Parameter
+    public function make(mixed $dependency): Parameter
     {
-        return new FormParameter($this->getValidator()->validateRaw());
-    }
-
-    protected function getValidator(): Validatable
-    {
-        return $this->container->get(Validatable::class);
+        return new FormParameter($dependency);
     }
 }

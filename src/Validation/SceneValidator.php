@@ -58,7 +58,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
     public function validateForm(): Parameter
     {
-        return $this->factory->make();
+        return $this->factory->make($this->validateRaw());
     }
 
     public function validateRaw(): array
@@ -89,11 +89,6 @@ abstract class SceneValidator extends FormRequest implements Validatable
         return $instance;
     }
 
-    public function scenes(): array
-    {
-        return [];
-    }
-
     public function hasRule(string $attribute): bool
     {
         return array_key_exists($attribute, $this->rules());
@@ -112,11 +107,11 @@ abstract class SceneValidator extends FormRequest implements Validatable
     private function prepareValidateRules(): array
     {
         $rules = $this->scene->hasRule()
-            ? $this->scene->merge($this)
+            ? $this->scene->merge()
             : $this->rules();
 
         return $this->scene->hasScene()
-            ? $this->scene->replaceRules($this)
+            ? $this->scene->replaceRules()
             : $rules;
     }
 
