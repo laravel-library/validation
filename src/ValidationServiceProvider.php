@@ -12,7 +12,6 @@ use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\SceneManager;
 use Dingo\Validation\Validation\Contacts\Store;
 use Dingo\Validation\Validation\ExtraData;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -34,10 +33,10 @@ class ValidationServiceProvider extends ServiceProvider
 
         $this->app->bind(Scene::class, SceneManager::class);
 
+        $this->app->bind(Factory::class, SceneFactory::class);
+
         $this->app->when(ValidatableFactory::class)
             ->needs(Guessable::class)
             ->give(ControllerGuesser::class);
-
-        $this->app->singleton(Factory::class, fn(Container $container) => new SceneFactory($container));
     }
 }

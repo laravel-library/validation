@@ -11,9 +11,9 @@ final readonly class ParameterFactory implements Factory
 {
     protected Container $container;
 
-    public function __construct(Container $app)
+    public function __construct(Container $container)
     {
-        $this->container = $app;
+        $this->container = $container;
     }
 
     public function make(mixed $dependency): Parameter
