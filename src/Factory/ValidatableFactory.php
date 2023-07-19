@@ -7,7 +7,7 @@ use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Factory\Exceptions\ValidateNotFoundException;
 use Dingo\Validation\Factory\Exceptions\ValidatorInheritanceException;
 use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\ValidatesWhenScene;
+use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class ValidatableFactory implements Factory
@@ -28,19 +28,6 @@ final readonly class ValidatableFactory implements Factory
         return $this->container->make($this->prepareValidator($dependency), $this->dependency());
     }
 
-    protected function dependency(): array
-    {
-        return [
-            'autoValidate' => false,
-            'factory'      => $this->getParameter(),
-        ];
-    }
-
-    protected function getParameter(): Factory
-    {
-        return $this->container->make(ParameterFactory::class);
-    }
-
     protected function prepareValidator(string $class): string
     {
         $class = $this->guessable->guess($class)->getResolved();
@@ -54,6 +41,14 @@ final readonly class ValidatableFactory implements Factory
         }
 
         return $class;
+    }
+
+    protected function dependency(): array
+    {
+        return [
+            'autoValidate' => false,
+            'factory'      => $this->container->make(ParameterFactory::class),
+        ];
     }
 
     protected function validateNotFound(string $class): never

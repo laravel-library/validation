@@ -6,8 +6,7 @@ namespace Dingo\Validation\Validation;
 
 use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Parameters\Contacts\Parameter;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Validation\Contacts\Store;
+use Dingo\Validation\Store\Contacts\DataAccess;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,26 +14,26 @@ use Illuminate\Foundation\Http\FormRequest;
 abstract class SceneValidator extends FormRequest implements Validatable
 {
 
-    protected readonly Store $store;
+    protected readonly DataAccess $store;
 
     protected readonly Factory $factory;
 
-    protected readonly Scene $scene;
+    protected readonly Factory $sceneFactory;
 
     private bool $autoValidate;
 
     public function __construct(
-        Store   $store,
-        Factory $factory,
-        Scene   $scene,
-        array   $query = [],
-        array   $request = [],
-        array   $attributes = [],
-        array   $cookies = [],
-        array   $files = [],
-        array   $server = [],
-        mixed   $content = null,
-        bool    $autoValidate = true
+        DataAccess $store,
+        Factory    $factory,
+        Factory    $sceneFactory,
+        array      $query = [],
+        array      $request = [],
+        array      $attributes = [],
+        array      $cookies = [],
+        array      $files = [],
+        array      $server = [],
+        mixed      $content = null,
+        bool       $autoValidate = true
     )
     {
 
@@ -44,7 +43,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
         $this->autoValidate = $autoValidate;
 
-        $this->scene = $scene;
+        $this->sceneFactory = $sceneFactory;
 
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
     }

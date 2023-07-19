@@ -9,8 +9,8 @@ use Dingo\Validation\Factory\SceneFactory;
 use Dingo\Validation\Factory\ValidatableFactory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\SceneManager;
-use Dingo\Validation\Validation\Contacts\Store;
-use Dingo\Validation\Validation\ExtraData;
+use Dingo\Validation\Store\Contacts\DataAccess;
+use Dingo\Validation\Store\Store;
 use Illuminate\Container\Container;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +23,7 @@ class ServiceProviderTest extends TestCase
     {
         $factory = $app->make(Factory::class);
 
-        dd($factory->make("App\\Http\\Controllers\\ExampleController"));
+        $scene = $factory->make("App\Http\Controllers\ExampleController");
 
     }
 
@@ -33,7 +33,7 @@ class ServiceProviderTest extends TestCase
 
         $app->bind(\Illuminate\Contracts\Container\Container::class, fn($app) => $app);
 
-        $app->singleton(Store::class, fn() => new ExtraData());
+        $app->singleton(DataAccess::class, fn() => new Store());
         $app->bind(Scene::class, SceneManager::class);
 
         $app->when(ValidatableFactory::class)

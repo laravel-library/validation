@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace Dingo\Validation\Scenes;
 
-use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Scenes\Contacts\Scene;
+use Dingo\Validation\Store\Contacts\DataAccess;
 use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\ValidatesWhenScene;
+use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
 use Illuminate\Support\Str;
 
 final class SceneManager implements Scene
 {
-    protected readonly Validatable|ValidatesWhenScene $validatable;
 
     protected ?string $scene = null;
 
-    protected array $rules = [];
+    protected readonly DataAccess                     $dataAccess;
+    protected readonly Validatable|ValidatesWhenScene $validatable;
 
-    public function __construct(Factory $factory, string $controller)
+    public function __construct(Validatable|ValidatesWhenScene $validatable, DataAccess $dataAccess)
     {
-        $this->validatable = $factory->make($controller);
+        $this->validatable = $validatable;
+
+        $this->dataAccess = $dataAccess;
     }
 
     public function hasRule(): bool
@@ -43,24 +45,14 @@ final class SceneManager implements Scene
     public function withRule(array|string $rule): Validatable
     {
         if (is_string($rule)) {
-            $this->extendRule($rule);
+            $this->dataAccess->store(Str::camel($rule));
         }
 
         if (is_array($rule)) {
-            $this->extendRules($rule);
+            $this->dataAccess->store($this->toCamel($rule));
         }
 
         return $this->validatable;
-    }
-
-    protected function extendRule(string $rule): void
-    {
-        $this->rules[] = Str::camel($rule);
-    }
-
-    protected function extendRules(array $rules): void
-    {
-        $this->rules = array_merge($this->rules, $this->toCamel($rules));
     }
 
     private function toCamel(array $rules): array
@@ -98,7 +90,7 @@ final class SceneManager implements Scene
 
     protected function getRules(): array
     {
-        return array_reduce($this->rules, function (array $extendRules, string $method): array {
+        return array_reduce($this->dataAccess->raw(), function (array $extendRules, string $method): array {
 
             $ruleMethod = "{$method}Rules";
 

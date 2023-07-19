@@ -10,8 +10,8 @@ use Dingo\Validation\Factory\SceneFactory;
 use Dingo\Validation\Factory\ValidatableFactory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\SceneManager;
-use Dingo\Validation\Validation\Contacts\Store;
-use Dingo\Validation\Validation\ExtraData;
+use Dingo\Validation\Store\Contacts\DataAccess;
+use Dingo\Validation\Store\Store;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -29,9 +29,9 @@ class ValidationServiceProvider extends ServiceProvider
 
     protected function registerSingle(): void
     {
-        $this->app->singleton(Store::class, new ExtraData());
+        $this->app->bind(DataAccess::class, fn() => new Store());
 
-        $this->app->bind(Scene::class, SceneManager::class);
+        $this->app->bind(Scene::class, SceneManager::class, true);
 
         $this->app->bind(Factory::class, SceneFactory::class);
 

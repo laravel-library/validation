@@ -19,7 +19,7 @@ final readonly class SceneFactory implements Contacts\Factory
 
     public function make(mixed $dependency): Scene
     {
-        return new SceneManager($this->makeFactory(), $dependency);
+        return new SceneManager($this->makeFactory()->make($dependency));
     }
 
     protected function makeFactory(): Factory
