@@ -14,7 +14,7 @@ use Illuminate\Foundation\Http\FormRequest;
 abstract class SceneValidator extends FormRequest implements Validatable
 {
 
-    protected readonly DataAccess $store;
+    protected readonly DataAccess $dataAccess;
 
     protected readonly Factory $factory;
 
@@ -37,7 +37,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
     )
     {
 
-        $this->store = $store;
+        $this->dataAccess = $store;
 
         $this->factory = $factory;
 
@@ -50,7 +50,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
     public function extra(array $values): Validatable
     {
-        $this->store->store($values);
+        $this->dataAccess->store($values);
 
         return $this;
     }
@@ -64,7 +64,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
     {
         $formData = $this->resolveValidator()->validated();
 
-        return $this->store->isEmpty() ? $formData : $this->store->merge($formData);
+        return $this->dataAccess->isEmpty() ? $formData : $this->dataAccess->merge($formData);
     }
 
     final public function validateResolved(): void
