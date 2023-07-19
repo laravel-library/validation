@@ -25,7 +25,11 @@ final readonly class ValidatableFactory implements Factory
 
     public function make(mixed $dependency): Validatable
     {
-        return $this->container->make($this->prepareValidator($dependency), $this->dependency());
+        return $this->container->make($this->prepareValidator($dependency), [
+            'sceneFactory' => $this->container->make(SceneFactory::class),
+            'factory'      => $this->container->make(ParameterFactory::class),
+            'autoValidate' => false,
+        ]);
     }
 
     protected function prepareValidator(string $class): string
@@ -41,14 +45,6 @@ final readonly class ValidatableFactory implements Factory
         }
 
         return $class;
-    }
-
-    protected function dependency(): array
-    {
-        return [
-            'autoValidate' => false,
-            'factory'      => $this->container->make(ParameterFactory::class),
-        ];
     }
 
     protected function validateNotFound(string $class): never

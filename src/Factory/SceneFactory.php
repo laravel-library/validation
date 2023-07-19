@@ -2,9 +2,9 @@
 
 namespace Dingo\Validation\Factory;
 
-use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Scenes\SceneManager;
+use Dingo\Validation\Store\Contacts\DataAccess;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class SceneFactory implements Contacts\Factory
@@ -19,11 +19,6 @@ final readonly class SceneFactory implements Contacts\Factory
 
     public function make(mixed $dependency): Scene
     {
-        return new SceneManager($this->makeFactory()->make($dependency));
-    }
-
-    protected function makeFactory(): Factory
-    {
-        return $this->app->make(ValidatableFactory::class);
+        return new SceneManager($dependency, $this->app->make(DataAccess::class));
     }
 }
