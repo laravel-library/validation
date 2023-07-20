@@ -2,7 +2,7 @@
 
 namespace Dingo\Validation\Validation\Contacts;
 
-use Dingo\Validation\Parameters\Contacts\Parameter;
+use Dingo\Validation\Transmit\Contacts\Transfer;
 
 interface Validatable
 {
@@ -12,7 +12,7 @@ interface Validatable
 
     public function extra(array $values): self;
 
-    public function validateForm(): Parameter;
+    public function validateForm(): Transfer;
 
     public function validateRaw(): array;
 }

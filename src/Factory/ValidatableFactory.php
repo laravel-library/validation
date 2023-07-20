@@ -12,22 +12,22 @@ use Illuminate\Contracts\Container\Container;
 
 final readonly class ValidatableFactory implements Factory
 {
-    protected Container $container;
+    protected Container $app;
 
     protected Guessable $guessable;
 
     public function __construct(Container $container, Guessable $guessable)
     {
-        $this->container = $container;
+        $this->app = $container;
 
         $this->guessable = $guessable;
     }
 
     public function make(mixed $dependency): Validatable
     {
-        return $this->container->make($this->prepareValidator($dependency), [
-            'sceneFactory' => $this->container->make(SceneFactory::class),
-            'factory'      => $this->container->make(ParameterFactory::class),
+        return $this->app->make($this->prepareValidator($dependency), [
+            'sceneFactory' => $this->app->make(SceneFactory::class),
+            'factory'      => $this->app->make(TransferFactory::class),
             'autoValidate' => false,
         ]);
     }

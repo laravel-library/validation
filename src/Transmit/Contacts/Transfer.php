@@ -1,10 +1,10 @@
 <?php
 
-namespace Dingo\Validation\Parameters\Contacts;
+namespace Dingo\Validation\Transmit\Contacts;
 
 use Closure;
 
-interface Parameter
+interface Transfer
 {
     public function get(string $name): mixed;
 

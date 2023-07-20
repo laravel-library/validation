@@ -1,11 +1,11 @@
 <?php
 
-namespace Dingo\Validation\Parameters;
+namespace Dingo\Validation\Transmit;
 
 use Closure;
-use Dingo\Validation\Parameters\Contacts\Parameter;
+use Dingo\Validation\Transmit\Contacts\Transfer;
 
-final class FormParameter implements Parameter
+final class Transmit implements Transfer
 {
     protected array $fromData;
 
@@ -19,14 +19,14 @@ final class FormParameter implements Parameter
         return $this->fromData[$name];
     }
 
-    public function except(array $attribute): Parameter
+    public function except(array $attribute): Transfer
     {
         $this->fromData = $this->filterFromData(fn(mixed $value, string $key) => !in_array($value, $attribute));
 
         return $this;
     }
 
-    public function filter(Closure $closure = null): Parameter
+    public function filter(Closure $closure = null): Transfer
     {
         $this->fromData = match (true) {
             $closure instanceof Closure => $this->filterFromData($closure),

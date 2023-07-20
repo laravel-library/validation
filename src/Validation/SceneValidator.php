@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dingo\Validation\Validation;
 
 use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Parameters\Contacts\Parameter;
+use Dingo\Validation\Transmit\Contacts\Transfer;
 use Dingo\Validation\Store\Contacts\DataAccess;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Validation\Validator;
@@ -55,7 +55,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
         return $this;
     }
 
-    public function validateForm(): Parameter
+    public function validateForm(): Transfer
     {
         return $this->factory->make($this->validateRaw());
     }
