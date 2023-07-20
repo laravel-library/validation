@@ -4,28 +4,27 @@ declare(strict_types=1);
 
 namespace Dingo\Validation\Validation;
 
-use Dingo\Validation\Factory\Contacts\Factory;
+use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Transmit\Contacts\Transfer;
 use Dingo\Validation\Store\Contacts\DataAccess;
+use Dingo\Validation\Transmit\Transmit;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Factory;
 
 abstract class SceneValidator extends FormRequest implements Validatable
 {
 
     protected readonly DataAccess $dataAccess;
 
-    protected readonly Factory $factory;
-
-    protected readonly Factory $sceneFactory;
+    protected readonly Scene $scene;
 
     private bool $autoValidate;
 
     public function __construct(
         DataAccess $store,
-        Factory    $factory,
-        Factory    $sceneFactory,
+        Scene      $scene,
         array      $query = [],
         array      $request = [],
         array      $attributes = [],
@@ -36,14 +35,11 @@ abstract class SceneValidator extends FormRequest implements Validatable
         bool       $autoValidate = true
     )
     {
-
         $this->dataAccess = $store;
-
-        $this->factory = $factory;
 
         $this->autoValidate = $autoValidate;
 
-        $this->sceneFactory = $sceneFactory;
+        $this->scene = $scene;
 
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
     }
@@ -57,7 +53,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
 
     public function validateForm(): Transfer
     {
-        return $this->factory->make($this->validateRaw());
+        return new Transmit($this->validateRaw());
     }
 
     public function validateRaw(): array
@@ -93,7 +89,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
         return array_key_exists($attribute, $this->rules());
     }
 
-    final public function validator(\Illuminate\Validation\Factory $factory): \Illuminate\Validation\Validator
+    final public function validator(Factory $factory): \Illuminate\Validation\Validator
     {
         return $factory->make(
             $this->validationData(),
@@ -106,11 +102,11 @@ abstract class SceneValidator extends FormRequest implements Validatable
     private function prepareValidateRules(): array
     {
         $rules = $this->scene->hasRule()
-            ? $this->scene->merge()
+            ? $this->scene->merge($this)
             : $this->rules();
 
         return $this->scene->hasScene()
-            ? $this->scene->replaceRules()
+            ? $this->scene->replaceRules($this)
             : $rules;
     }
 

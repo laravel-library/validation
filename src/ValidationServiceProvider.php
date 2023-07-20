@@ -22,18 +22,22 @@ class ValidationServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->registerSingle();
+        $this->bindings();
 
         $this->commands($this->commands);
     }
 
-    protected function registerSingle(): void
+    protected function bindings(): void
     {
         $this->app->bind(DataAccess::class, fn() => new Store());
 
         $this->app->singleton(Scene::class, SceneManager::class);
 
         $this->app->bind(Factory::class, SceneFactory::class);
+
+        $this->app->when(SceneManager::class)
+            ->needs(Factory::class)
+            ->give(ValidatableFactory::class);
 
         $this->app->when(ValidatableFactory::class)
             ->needs(Guessable::class)

@@ -2,6 +2,7 @@
 
 namespace Dingo\Validation\Factory;
 
+use Dingo\Query\Contacts\Queryable;
 use Dingo\Support\Guesser\Contacts\Guessable;
 use Dingo\Validation\Factory\Contacts\Factory;
 use Dingo\Validation\Factory\Exceptions\ValidateNotFoundException;
@@ -26,8 +27,6 @@ final readonly class ValidatableFactory implements Factory
     public function make(mixed $dependency): Validatable
     {
         return $this->app->make($this->prepareValidator($dependency), [
-            'sceneFactory' => $this->app->make(SceneFactory::class),
-            'factory'      => $this->app->make(TransferFactory::class),
             'autoValidate' => false,
         ]);
     }
