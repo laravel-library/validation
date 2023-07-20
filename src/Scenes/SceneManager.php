@@ -8,7 +8,6 @@ use Dingo\Validation\Scenes\Contacts\Scene;
 use Dingo\Validation\Store\Contacts\DataAccess;
 use Dingo\Validation\Validation\Contacts\Validatable;
 use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
-use Illuminate\Support\Str;
 
 final class SceneManager implements Scene
 {
@@ -44,20 +43,9 @@ final class SceneManager implements Scene
 
     public function withRule(array|string $rule): Validatable
     {
-        if (is_string($rule)) {
-            $this->dataAccess->store(Str::camel($rule));
-        }
-
-        if (is_array($rule)) {
-            $this->dataAccess->store($this->toCamel($rule));
-        }
+        $this->dataAccess->store($rule);
 
         return $this->validatable;
-    }
-
-    private function toCamel(array $rules): array
-    {
-        return array_map(fn(string $method) => Str::camel($method), $rules);
     }
 
     public function replaceRules(): array

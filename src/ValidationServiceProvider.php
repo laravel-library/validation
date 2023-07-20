@@ -31,7 +31,7 @@ class ValidationServiceProvider extends ServiceProvider
     {
         $this->app->bind(DataAccess::class, fn() => new Store());
 
-        $this->app->bind(Scene::class, SceneManager::class, true);
+        $this->app->singleton(Scene::class, SceneManager::class);
 
         $this->app->bind(Factory::class, SceneFactory::class);
 
