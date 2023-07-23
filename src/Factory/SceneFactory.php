@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Factory;
+namespace Koala\Validation\Factory;
 
-use Dingo\Validation\Scenes\Contacts\Scene;
+use Koala\Validation\Scenes\Contacts\Scene;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class SceneFactory implements Contacts\Factory

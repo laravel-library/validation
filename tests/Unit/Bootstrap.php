@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Dingo\Validation\ValidationServiceProvider;
+use Koala\Validation\ValidationServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application;
 

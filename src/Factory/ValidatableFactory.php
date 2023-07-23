@@ -1,14 +1,14 @@
 <?php
 
-namespace Dingo\Validation\Factory;
+namespace Koala\Validation\Factory;
 
-use Dingo\Query\Contacts\Queryable;
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\Exceptions\ValidateNotFoundException;
-use Dingo\Validation\Factory\Exceptions\ValidatorInheritanceException;
-use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
+use Koala\Query\Contacts\Queryable;
+use Koala\Support\Guesser\Contacts\Guessable;
+use Koala\Validation\Factory\Contacts\Factory;
+use Koala\Validation\Factory\Exceptions\ValidateNotFoundException;
+use Koala\Validation\Factory\Exceptions\ValidatorInheritanceException;
+use Koala\Validation\Validation\Contacts\Validatable;
+use Koala\Validation\Validation\Contacts\ValidatesWhenScene;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class ValidatableFactory implements Factory

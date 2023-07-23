@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Store;
 
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Store\Store;
+use Koala\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Store\Store;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

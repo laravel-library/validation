@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Commands;
+namespace Koala\Validation\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 

@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d90e56f486379006d49777efcff6ea2",
-    "packages": [],
+    "content-hash": "af906235233b402bd4053aec826b5e2c",
+    "packages": [
+        {
+            "name": "xgbnl/guesser",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-library/guesser.git",
+                "reference": "a25ce4a83fbc419127c02b7ec9212ea556a23722"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-library/guesser/zipball/a25ce4a83fbc419127c02b7ec9212ea556a23722",
+                "reference": "a25ce4a83fbc419127c02b7ec9212ea556a23722",
+                "shasum": ""
+            },
+            "require": {
+                "php": "8.2.*"
+            },
+            "require-dev": {
+                "illuminate/contracts": "^10.15",
+                "illuminate/database": "^10.15"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Koala\\Guesses\\GuesserServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Koala\\Guesses\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Koala base component.",
+            "support": {
+                "issues": "https://github.com/laravel-library/guesser/issues",
+                "source": "https://github.com/laravel-library/guesser/tree/main"
+            },
+            "time": "2023-07-22T08:14:12+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "brick/math",
@@ -657,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9c44052743b0ee7f3adea36994918b4d8019e8b3"
+                "reference": "c59d540ab142d36ee0f62c3ddc749329a968466b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9c44052743b0ee7f3adea36994918b4d8019e8b3",
-                "reference": "9c44052743b0ee7f3adea36994918b4d8019e8b3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c59d540ab142d36ee0f62c3ddc749329a968466b",
+                "reference": "c59d540ab142d36ee0f62c3ddc749329a968466b",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +897,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-07-19T11:36:21+00:00"
+            "time": "2023-07-20T15:17:14+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -4398,12 +4445,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "0db802c79a7b1087a0bb23171ac5605cdb999a36"
+                "reference": "91f65b2874cf94ec6b36b0782323890fa3b03abc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/0db802c79a7b1087a0bb23171ac5605cdb999a36",
-                "reference": "0db802c79a7b1087a0bb23171ac5605cdb999a36",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/91f65b2874cf94ec6b36b0782323890fa3b03abc",
+                "reference": "91f65b2874cf94ec6b36b0782323890fa3b03abc",
                 "shasum": ""
             },
             "require": {
@@ -4467,7 +4514,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-19T20:17:34+00:00"
+            "time": "2023-07-20T14:51:50+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -4475,12 +4522,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "d8c2517e1a9b029336762a5d224995bebf41c186"
+                "reference": "45f413c822e7cf015b2822f6071bab3b7a69c590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/d8c2517e1a9b029336762a5d224995bebf41c186",
-                "reference": "d8c2517e1a9b029336762a5d224995bebf41c186",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/45f413c822e7cf015b2822f6071bab3b7a69c590",
+                "reference": "45f413c822e7cf015b2822f6071bab3b7a69c590",
                 "shasum": ""
             },
             "require": {
@@ -4580,7 +4627,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-13T14:49:39+00:00"
+            "time": "2023-07-20T14:51:50+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -6054,12 +6101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f3db0c8da56d364e7e863593fccac28e6b7a35fa"
+                "reference": "13aa695c52c34dcddc0d0a768f8c7d6a0925b722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f3db0c8da56d364e7e863593fccac28e6b7a35fa",
-                "reference": "f3db0c8da56d364e7e863593fccac28e6b7a35fa",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/13aa695c52c34dcddc0d0a768f8c7d6a0925b722",
+                "reference": "13aa695c52c34dcddc0d0a768f8c7d6a0925b722",
                 "shasum": ""
             },
             "require": {
@@ -6129,7 +6176,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-19T20:17:34+00:00"
+            "time": "2023-07-21T07:06:03+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -6553,6 +6600,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "xgbnl/guesser": 20,
         "xgbnl/dingo": 20
     },
     "prefer-stable": false,

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Guesses;
 
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Boundary\Guesses\ControllerGuesser;
+use Koala\Support\Guesser\Contacts\Guessable;
+use Koala\Validation\Boundary\Guesses\ControllerGuesser;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

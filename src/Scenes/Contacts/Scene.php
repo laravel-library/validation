@@ -1,9 +1,9 @@
 <?php
 
-namespace Dingo\Validation\Scenes\Contacts;
+namespace Koala\Validation\Scenes\Contacts;
 
-use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
+use Koala\Validation\Validation\Contacts\Validatable;
+use Koala\Validation\Validation\Contacts\ValidatesWhenScene;
 
 interface Scene
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Dingo\Validation;
+namespace Koala\Validation;
 
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Boundary\Guesses\ControllerGuesser;
-use Dingo\Validation\Commands\ValidatorCommand;
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\SceneFactory;
-use Dingo\Validation\Factory\ValidatableFactory;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Scenes\SceneManager;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Store\Store;
+use Koala\Guesses\Contacts\Guessable;
+use Koala\Guesses\Guesses\ValidatorGuesser;
+use Koala\Validation\Commands\ValidatorCommand;
+use Koala\Validation\Factory\Contacts\Factory;
+use Koala\Validation\Factory\SceneFactory;
+use Koala\Validation\Factory\ValidatableFactory;
+use Koala\Validation\Scenes\Contacts\Scene;
+use Koala\Validation\Scenes\SceneManager;
+use Koala\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Store\Store;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -41,6 +41,6 @@ class ValidationServiceProvider extends ServiceProvider
 
         $this->app->when(ValidatableFactory::class)
             ->needs(Guessable::class)
-            ->give(ControllerGuesser::class);
+            ->give(ValidatorGuesser::class);
     }
 }

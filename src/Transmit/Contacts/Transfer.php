@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Transmit\Contacts;
+namespace Koala\Validation\Transmit\Contacts;
 
 use Closure;
 

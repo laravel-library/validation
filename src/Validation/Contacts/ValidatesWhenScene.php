@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Validation\Contacts;
+namespace Koala\Validation\Validation\Contacts;
 
 interface ValidatesWhenScene
 {

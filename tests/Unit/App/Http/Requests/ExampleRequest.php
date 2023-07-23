@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
-use Dingo\Validation\Validation\SceneValidator;
+use Koala\Validation\Validation\Contacts\ValidatesWhenScene;
+use Koala\Validation\Validation\SceneValidator;
 
 class ExampleRequest extends SceneValidator implements ValidatesWhenScene
 {

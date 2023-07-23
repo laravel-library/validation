@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Store;
+namespace Koala\Validation\Store;
 
-use Dingo\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Store\Contacts\DataAccess;
 
 final class Store implements DataAccess
 {

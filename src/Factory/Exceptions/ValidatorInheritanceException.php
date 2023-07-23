@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Factory\Exceptions;
+namespace Koala\Validation\Factory\Exceptions;
 
 use RuntimeException;
 use Throwable;

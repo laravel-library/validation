@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Factory\Contacts;
+namespace Koala\Validation\Factory\Contacts;
 
 interface Factory
 {

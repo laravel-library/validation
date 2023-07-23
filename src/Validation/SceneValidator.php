@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dingo\Validation\Validation;
+namespace Koala\Validation\Validation;
 
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Transmit\Contacts\Transfer;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Transmit\Transmit;
-use Dingo\Validation\Validation\Contacts\Validatable;
+use Koala\Validation\Scenes\Contacts\Scene;
+use Koala\Validation\Transmit\Contacts\Transfer;
+use Koala\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Transmit\Transmit;
+use Koala\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Factory;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dingo\Validation\Scenes;
+namespace Koala\Validation\Scenes;
 
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
+use Koala\Validation\Factory\Contacts\Factory;
+use Koala\Validation\Scenes\Contacts\Scene;
+use Koala\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Validation\Contacts\Validatable;
+use Koala\Validation\Validation\Contacts\ValidatesWhenScene;
 
 final class SceneManager implements Scene
 {

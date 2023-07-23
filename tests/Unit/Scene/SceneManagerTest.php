@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Scene;
 
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Scenes\SceneManager;
+use Koala\Validation\Factory\Contacts\Factory;
+use Koala\Validation\Scenes\SceneManager;
 use Illuminate\Foundation\Application;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
