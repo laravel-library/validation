@@ -50,7 +50,9 @@ abstract class Validator extends FormRequest implements Validatable, ValidateWhe
 
     public function validateForm(): Resourceable
     {
-        $this->resource->flush();
+        if (!$this->resource->isEmpty()) {
+            $this->resource->flush();
+        }
 
         return $this->resource->extra($this->validateRaw());
     }
@@ -65,7 +67,7 @@ abstract class Validator extends FormRequest implements Validatable, ValidateWhe
             $this->failedValidationException($validationException);
         }
 
-        return $this->resource->isEmpty() ? $formData : $this->resource->extra($formData)->values();
+        return $formData;
     }
 
     final public function validateResolved(): void
@@ -101,7 +103,6 @@ abstract class Validator extends FormRequest implements Validatable, ValidateWhe
     {
         throw new \Elephant\Validation\Exception\ValidationException(message: $exception->getMessage(), previous: $exception);
     }
-
 
 
     final public function validator(Factory $factory): AbstractValidator
