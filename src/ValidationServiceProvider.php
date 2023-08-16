@@ -1,17 +1,16 @@
 <?php
 
-namespace Dingo\Validation;
+namespace Elephant\Validation;
 
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Boundary\Guesses\ControllerGuesser;
-use Dingo\Validation\Commands\ValidatorCommand;
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\SceneFactory;
-use Dingo\Validation\Factory\ValidatableFactory;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Scenes\SceneManager;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Store\Store;
+
+use Elephant\Validation\Commands\ValidatorCommand;
+use Elephant\Validation\Factory\Contacts\Factory;
+use Elephant\Validation\Factory\SceneFactory;
+use Elephant\Validation\Factory\ValidatableFactory;
+use Elephant\Validation\Scenes\Contacts\Scene;
+use Elephant\Validation\Scenes\SceneManager;
+use Elephant\Validation\Store\Contacts\DataAccess;
+use Elephant\Validation\Store\Store;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -38,9 +37,5 @@ class ValidationServiceProvider extends ServiceProvider
         $this->app->when(SceneManager::class)
             ->needs(Factory::class)
             ->give(ValidatableFactory::class);
-
-        $this->app->when(ValidatableFactory::class)
-            ->needs(Guessable::class)
-            ->give(ControllerGuesser::class);
     }
 }

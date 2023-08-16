@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Dingo\Validation\Validation\Validator;
+use Elephant\Validation\Validation\Validator;
 
 final class DummyClass extends Validator
 {

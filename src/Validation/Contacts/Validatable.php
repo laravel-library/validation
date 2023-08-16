@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Validation\Contacts;
+namespace Elephant\Validation\Validation\Contacts;
 
-use Dingo\Validation\Transmit\Contacts\Transfer;
+use Elephant\Validation\Transmit\Contacts\Transfer;
 
 interface Validatable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Validation\Contacts;
+namespace Elephant\Validation\Validation\Contacts;
 
 interface ValidatesWhenScene
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Dingo\Validation\Transmit;
+namespace Elephant\Validation\Transmit;
 
 use Closure;
-use Dingo\Validation\Transmit\Contacts\Transfer;
+use Elephant\Validation\Transmit\Contacts\Transfer;
 
 final class Transmit implements Transfer
 {

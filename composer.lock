@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d90e56f486379006d49777efcff6ea2",
+    "content-hash": "fd9176947a7dca35e29d472c07097602",
     "packages": [],
     "packages-dev": [
         {
@@ -6451,110 +6451,11 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "xgbnl/dingo",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-library/dingo.git",
-                "reference": "bf86e2a615e914b15d765603da31dd9f93182d83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-library/dingo/zipball/bf86e2a615e914b15d765603da31dd9f93182d83",
-                "reference": "bf86e2a615e914b15d765603da31dd9f93182d83",
-                "shasum": ""
-            },
-            "require": {
-                "ext-redis": "*",
-                "php": "^8.2",
-                "xgbnl/paginator": "dev-main"
-            },
-            "require-dev": {
-                "illuminate/database": "^10.13.5",
-                "illuminate/http": "^10.13.5",
-                "illuminate/redis": "^10.13.5",
-                "illuminate/support": "^10.13.5",
-                "phpunit/phpunit": "^10.2"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Dingo\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "RedisClient": "Dingo\\Support\\Facades\\RedisClient"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dingo\\": "src/",
-                    "Dingo\\Support\\Facades\\": "src/Support/Facades/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "LayeredStructure",
-            "support": {
-                "issues": "https://github.com/laravel-library/dingo/issues",
-                "source": "https://github.com/laravel-library/dingo/tree/main"
-            },
-            "time": "2023-07-13T01:22:46+00:00"
-        },
-        {
-            "name": "xgbnl/paginator",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-library/paginator.git",
-                "reference": "04132d285420167b7a7ced7f38265d61281d1b4a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-library/paginator/zipball/04132d285420167b7a7ced7f38265d61281d1b4a",
-                "reference": "04132d285420167b7a7ced7f38265d61281d1b4a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "illuminate/console": "^10.13.5",
-                "illuminate/database": "^10.13.5",
-                "illuminate/http": "^10.13.5",
-                "illuminate/pagination": "^10.13.5",
-                "illuminate/support": "^10.13.5"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dingo\\Paginator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "laravel page turbo.",
-            "support": {
-                "issues": "https://github.com/laravel-library/paginator/issues",
-                "source": "https://github.com/laravel-library/paginator/tree/main"
-            },
-            "time": "2023-07-12T01:01:19+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "xgbnl/dingo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

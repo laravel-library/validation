@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Factory\Exceptions;
+namespace Elephant\Validation\Factory\Exceptions;
 
 use RuntimeException;
 use Throwable;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Dingo\Validation\Factory;
+namespace Elephant\Validation\Factory;
 
-use Dingo\Query\Contacts\Queryable;
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\Exceptions\ValidateNotFoundException;
-use Dingo\Validation\Factory\Exceptions\ValidatorInheritanceException;
-use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
+use Elephant\Query\Contacts\Queryable;
+use Elephant\Support\Guesser\Contacts\Guessable;
+use Elephant\Validation\Factory\Contacts\Factory;
+use Elephant\Validation\Factory\Exceptions\ValidateNotFoundException;
+use Elephant\Validation\Factory\Exceptions\ValidatorInheritanceException;
+use Elephant\Validation\Validation\Contacts\Validatable;
+use Elephant\Validation\Validation\Contacts\ValidatesWhenScene;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class ValidatableFactory implements Factory

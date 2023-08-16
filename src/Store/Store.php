@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Store;
+namespace Elephant\Validation\Store;
 
-use Dingo\Validation\Store\Contacts\DataAccess;
+use Elephant\Validation\Store\Contacts\DataAccess;
 
 final class Store implements DataAccess
 {

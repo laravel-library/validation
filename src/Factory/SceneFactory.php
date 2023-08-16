@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Validation\Factory;
+namespace Elephant\Validation\Factory;
 
-use Dingo\Validation\Scenes\Contacts\Scene;
+use Elephant\Validation\Scenes\Contacts\Scene;
 use Illuminate\Contracts\Container\Container;
 
 final readonly class SceneFactory implements Contacts\Factory

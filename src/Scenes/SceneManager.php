@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dingo\Validation\Scenes;
+namespace Elephant\Validation\Scenes;
 
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Validation\Contacts\Validatable;
-use Dingo\Validation\Validation\Contacts\ValidatesWhenScene;
+use Elephant\Validation\Factory\Contacts\Factory;
+use Elephant\Validation\Scenes\Contacts\Scene;
+use Elephant\Validation\Store\Contacts\DataAccess;
+use Elephant\Validation\Validation\Contacts\Validatable;
+use Elephant\Validation\Validation\Contacts\ValidatesWhenScene;
 
 final class SceneManager implements Scene
 {

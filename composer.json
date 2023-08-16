@@ -5,7 +5,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Dingo\\Validation\\": "src/"
+      "Elephant\\Validation\\": "src/"
     }
   },
   "autoload-dev": {
@@ -23,13 +23,12 @@
     "illuminate/support": "^10.15",
     "illuminate/http": "^10.15",
     "laravel/framework": "^10.15",
-    "xgbnl/dingo": "dev-main",
     "phpunit/phpunit": "^10.2"
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Dingo\\Validation\\ValidationServiceProvider"
+        "Elephant\\Validation\\ValidationServiceProvider"
       ]
     }
   }

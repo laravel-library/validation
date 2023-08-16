@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Store\Contacts;
+namespace Elephant\Validation\Store\Contacts;
 
 interface DataAccess
 {

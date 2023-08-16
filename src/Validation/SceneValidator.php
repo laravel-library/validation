@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dingo\Validation\Validation;
+namespace Elephant\Validation\Validation;
 
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Transmit\Contacts\Transfer;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Transmit\Transmit;
-use Dingo\Validation\Validation\Contacts\Validatable;
+use Elephant\Validation\Scenes\Contacts\Scene;
+use Elephant\Validation\Transmit\Contacts\Transfer;
+use Elephant\Validation\Store\Contacts\DataAccess;
+use Elephant\Validation\Transmit\Transmit;
+use Elephant\Validation\Validation\Contacts\Validatable;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Factory;
@@ -32,7 +32,7 @@ abstract class SceneValidator extends FormRequest implements Validatable
         array      $files = [],
         array      $server = [],
         mixed      $content = null,
-        bool       $autoValidate = true
+        bool       $autoValidate = false
     )
     {
         $this->dataAccess = $store;

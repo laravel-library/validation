@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Commands;
+namespace Elephant\Validation\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
@@ -9,7 +9,7 @@ class ValidatorCommand extends GeneratorCommand
 
     protected $signature = 'make:validator';
 
-    protected $description = 'Create a new validator.';
+    protected $description = 'Create a new request validator.';
 
     protected function getStub(): string
     {

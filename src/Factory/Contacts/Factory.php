@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Validation\Factory\Contacts;
+namespace Elephant\Validation\Factory\Contacts;
 
 interface Factory
 {
