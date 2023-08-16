@@ -9,11 +9,9 @@ use Elephant\Validation\Contacts\Resources\Resourceable;
 use Elephant\Validation\Contacts\Validation\Scene\Scene;
 use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
-use Illuminate\Validation\Factory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Validation\Validator as AbstractValidator;
 use Illuminate\Contracts\Validation\Validator as ValidatorContacts;
 
 abstract class Validator extends FormRequest implements Validatable, ValidateWhenScene
@@ -102,28 +100,6 @@ abstract class Validator extends FormRequest implements Validatable, ValidateWhe
     private function failedValidationException(Exception $exception): never
     {
         throw new \Elephant\Validation\Exception\ValidationException(message: $exception->getMessage(), previous: $exception);
-    }
-
-
-    final public function validator(Factory $factory): AbstractValidator
-    {
-        return $factory->make(
-            $this->validationData(),
-            $this->prepareValidateRules(),
-            $this->messages(),
-            $this->attributes()
-        );
-    }
-
-    private function prepareValidateRules(): array
-    {
-        $rules = $this->scene->hasRule()
-            ? $this->scene->merge($this)
-            : $this->rules();
-
-        return $this->scene->hasScene()
-            ? $this->scene->replaceRules($this)
-            : $rules;
     }
 
     abstract public function rules(): array;
