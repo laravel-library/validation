@@ -4,28 +4,25 @@ declare(strict_types=1);
 
 namespace Elephant\Validation\Scenes;
 
-use Elephant\Validation\Factory\Contacts\Factory;
-use Elephant\Validation\Scenes\Contacts\Scene;
-use Elephant\Validation\Store\Contacts\DataAccess;
-use Elephant\Validation\Validation\Contacts\Validatable;
-use Elephant\Validation\Validation\Contacts\ValidatesWhenScene;
+use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Validation\Scene\Scene;
+use Elephant\Validation\Contacts\Validation\Validatable;
+use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 
 final class SceneManager implements Scene
 {
 
     protected ?string $scene = null;
 
-    protected readonly DataAccess $dataAccess;
-    protected readonly Factory    $factory;
+    protected readonly Resourceable $resource;
 
-    public function __construct(Factory $factory, DataAccess $dataAccess)
+    public function __construct( Resourceable $resource)
     {
-        $this->factory = $factory;
 
-        $this->dataAccess = $dataAccess;
+        $this->resource = $resource;
     }
 
-    public function hasRule(): bool
+    public function hasRule(string $attribute): bool
     {
         return !empty($this->scene);
     }
@@ -35,21 +32,21 @@ final class SceneManager implements Scene
         return !empty($this->rules);
     }
 
-    public function withScene(string $scene): Validatable
+    public function withScene(string $scene): ValidateWhenScene
     {
         $this->scene = $scene;
 
-        return $this->factory->make($this);
+        return $this;
     }
 
-    public function withRule(array|string $rule): Validatable
+    public function withRule(array|string $rule): ValidateWhenScene
     {
-        $this->dataAccess->store($rule);
+        $this->resource->extra($rule);
 
-        return $this->factory->make($this);
+        return $this;
     }
 
-    public function replaceRules(Validatable|ValidatesWhenScene $validatable): array
+    public function replaceRules(Validatable|ValidateWhenScene $validatable): array
     {
         $attributes = $this->resolveSceneRuleAttributes($validatable->scenes());
 

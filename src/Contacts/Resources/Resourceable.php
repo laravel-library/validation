@@ -1,10 +1,10 @@
 <?php
 
-namespace Elephant\Validation\Transmit\Contacts;
+namespace Elephant\Validation\Contacts\Resources;
 
 use Closure;
 
-interface Transfer
+interface Resourceable
 {
     public function get(string $name): mixed;
 
@@ -13,4 +13,10 @@ interface Transfer
     public function filter(Closure $closure = null): self;
 
     public function values(): array;
+
+    public function isEmpty(): bool;
+
+    public function extra(array $values): self;
+
+    public function flush(): void;
 }

@@ -1,16 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elephant\Validation;
 
-
 use Elephant\Validation\Commands\ValidatorCommand;
-use Elephant\Validation\Factory\Contacts\Factory;
-use Elephant\Validation\Factory\SceneFactory;
-use Elephant\Validation\Factory\ValidatableFactory;
-use Elephant\Validation\Scenes\Contacts\Scene;
+use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Validation\Scene\Scene;
+use Elephant\Validation\Resources\FormDataResource;
 use Elephant\Validation\Scenes\SceneManager;
-use Elephant\Validation\Store\Contacts\DataAccess;
-use Elephant\Validation\Store\Store;
 use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
@@ -28,14 +26,8 @@ class ValidationServiceProvider extends ServiceProvider
 
     protected function bindings(): void
     {
-        $this->app->bind(DataAccess::class, fn() => new Store());
+        $this->app->bind(Resourceable::class, fn(): Resourceable => new FormDataResource());
 
         $this->app->singleton(Scene::class, SceneManager::class);
-
-        $this->app->bind(Factory::class, SceneFactory::class);
-
-        $this->app->when(SceneManager::class)
-            ->needs(Factory::class)
-            ->give(ValidatableFactory::class);
     }
 }
