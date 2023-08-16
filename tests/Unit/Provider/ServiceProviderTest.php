@@ -2,15 +2,15 @@
 
 namespace Tests\Unit\Provider;
 
-use Dingo\Support\Guesser\Contacts\Guessable;
-use Dingo\Validation\Boundary\Guesses\ControllerGuesser;
-use Dingo\Validation\Factory\Contacts\Factory;
-use Dingo\Validation\Factory\SceneFactory;
-use Dingo\Validation\Factory\ValidatableFactory;
-use Dingo\Validation\Scenes\Contacts\Scene;
-use Dingo\Validation\Scenes\SceneManager;
-use Dingo\Validation\Store\Contacts\DataAccess;
-use Dingo\Validation\Store\Store;
+use Koala\Support\Guesser\Contacts\Guessable;
+use Koala\Validation\Boundary\Guesses\ControllerGuesser;
+use Koala\Validation\Factory\Contacts\Factory;
+use Koala\Validation\Factory\SceneFactory;
+use Koala\Validation\Factory\ValidatableFactory;
+use Koala\Validation\Scenes\Contacts\Scene;
+use Koala\Validation\Scenes\SceneManager;
+use Koala\Validation\Store\Contacts\DataAccess;
+use Koala\Validation\Store\Store;
 use Illuminate\Container\Container;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
