@@ -5,48 +5,49 @@ declare(strict_types=1);
 namespace Elephant\Validation\Scenes;
 
 use Elephant\Validation\Contacts\Resources\Resourceable;
-use Elephant\Validation\Contacts\Validation\Scene\Scene;
+use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
+use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 
-final class SceneManager implements Scene
+final class SceneManager implements SceneValidatable
 {
 
     protected ?string $scene = null;
 
     protected readonly Resourceable $resource;
 
-    public function __construct( Resourceable $resource)
+    public function __construct(Resourceable $resource)
     {
 
         $this->resource = $resource;
     }
 
-    public function hasRule(string $attribute): bool
-    {
-        return !empty($this->scene);
-    }
-
-    public function hasScene(): bool
+    public function hasRule(): bool
     {
         return !empty($this->rules);
     }
 
-    public function withScene(string $scene): ValidateWhenScene
+    public function hasScene(): bool
+    {
+        return !empty($this->scene);
+    }
+
+    public function withScene(string $scene): Scene
     {
         $this->scene = $scene;
 
         return $this;
     }
 
-    public function withRule(array|string $rule): ValidateWhenScene
+    public function withRule(array|string $rule): Scene
     {
         $this->resource->extra($rule);
 
         return $this;
     }
 
-    public function replaceRules(Validatable|ValidateWhenScene $validatable): array
+    public function replaceRules(Validatable|Scene|ValidateWhenScene $validatable): array
     {
         $attributes = $this->resolveSceneRuleAttributes($validatable->scenes());
 
@@ -76,11 +77,11 @@ final class SceneManager implements Scene
 
     protected function getRules(Validatable $validatable): array
     {
-        return array_reduce($this->dataAccess->raw(), function (array $extendRules, string $method) use ($validatable): array {
+        return array_reduce($this->resource->values(), function (array $extendRules, string $method) use ($validatable): array {
 
             $ruleMethod = "{$method}Rules";
 
-            if (method_exists($validatable, $ruleMethod)) {
+            if ($validatable->hasRuleMethod($ruleMethod)) {
                 $extendRules = array_merge($extendRules, $validatable->{$ruleMethod}());
             }
 

@@ -2,21 +2,23 @@
 
 namespace Elephant\Validation\Validation;
 
+use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Exception\ValidationInheritanceException;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator as AbstractValidator;
 
 trait ValidateWhenSceneTrait
 {
 
-    final public function withRule(string $rule): ValidateWhenScene
+    final public function withRule(string $rule): Scene
     {
         $this->scene->withRule($rule);
 
         return $this;
     }
 
-    final public function withScene(string $scene): ValidateWhenScene
+    final public function withScene(string $scene): Scene
     {
         $this->scene->withScene($scene);
 
@@ -26,6 +28,11 @@ trait ValidateWhenSceneTrait
     final public function hasRule(string $attribute): bool
     {
         return array_key_exists($attribute, $this->rules());
+    }
+
+    final public function hasRuleMethod(string $name): bool
+    {
+        return method_exists($this, $name);
     }
 
     final public function validator(Factory $factory): AbstractValidator
@@ -45,8 +52,17 @@ trait ValidateWhenSceneTrait
             : $this->rules();
 
         return $this->scene->hasScene()
-            ? $this->scene->replaceRules($this)
+            ? $this->replaceRules()
             : $rules;
+    }
+
+    private function replaceRules(): array
+    {
+        if (!class_implements($this, ValidateWhenScene::class)) {
+            throw new ValidationInheritanceException('class [' . get_called_class() . ' must be inheritance]' . ValidationInheritanceException::class);
+        }
+
+        return $this->scene->replaceRules($this);
     }
 
 }

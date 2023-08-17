@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 use Elephant\Validation\Validation\Validator;
 
-final class DummyClass extends Validator
+final class DummyClass extends Validator implements ValidateWhenScene
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,16 @@ final class DummyClass extends Validator
     {
         return [
             //
+        ];
+    }
+
+    /**
+    * Configuring custom validation scenarios.
+    */
+    public function scenes(): array
+    {
+        return [
+            // TODO: Implement scenes() method.
         ];
     }
 }

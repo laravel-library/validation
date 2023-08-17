@@ -6,35 +6,35 @@ namespace Elephant\Validation\Validation;
 
 use Exception;
 use Elephant\Validation\Contacts\Resources\Resourceable;
-use Elephant\Validation\Contacts\Validation\Scene\Scene;
+use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
-use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Contacts\Validation\Scene;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\Validator as ValidatorContacts;
 
-abstract class Validator extends FormRequest implements Validatable, ValidateWhenScene
+abstract class Validator extends FormRequest implements Validatable, Scene
 {
     use ValidateWhenSceneTrait;
 
     protected readonly Resourceable $resource;
 
-    protected readonly Scene $scene;
+    protected readonly SceneValidatable $scene;
 
     private bool $autoValidate;
 
     public function __construct(
-        Resourceable $resource,
-        Scene        $scene,
-        array        $query = [],
-        array        $request = [],
-        array        $attributes = [],
-        array        $cookies = [],
-        array        $files = [],
-        array        $server = [],
-        mixed        $content = null,
-        bool         $autoValidate = false
+        Resourceable     $resource,
+        SceneValidatable $scene,
+        array            $query = [],
+        array            $request = [],
+        array            $attributes = [],
+        array            $cookies = [],
+        array            $files = [],
+        array            $server = [],
+        mixed            $content = null,
+        bool             $autoValidate = false
     )
     {
         $this->resource = $resource;
