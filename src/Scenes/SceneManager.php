@@ -24,7 +24,7 @@ final class SceneManager implements SceneValidatable
 
     public function hasRule(): bool
     {
-        return !empty($this->rules);
+        return !$this->resource->isEmpty();
     }
 
     public function hasScene(): bool
