@@ -69,12 +69,12 @@ final class SceneManager implements SceneValidatable
             : $attributes;
     }
 
-    public function merge(Validatable $validatable): array
+    public function merge(Validatable|ValidateWhenScene|Scene $validatable): array
     {
         return array_merge($validatable->rules(), $this->getRules($validatable));
     }
 
-    protected function getRules(Validatable $validatable): array
+    protected function getRules(Validatable|ValidateWhenScene|Scene $validatable): array
     {
         return array_reduce($this->resource->values(), function (array $extendRules, string $method) use ($validatable): array {
 
