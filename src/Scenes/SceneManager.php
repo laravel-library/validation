@@ -19,7 +19,6 @@ final class SceneManager implements SceneValidatable
 
     public function __construct(Resourceable $resource)
     {
-
         $this->resource = $resource;
     }
 
