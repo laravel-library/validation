@@ -52,9 +52,11 @@ final class SceneManager implements SceneValidatable
 
     public function refreshRules(Validatable|Scene|ValidateWhenScene $validatable): array
     {
-        $originRules = $this->hasRule() ? $this->mergeRules($validatable) : $validatable->rules();
+        $resolvedRules = $this->resolveSceneRuleAttributes($validatable->scenes());
 
-        $attributes = $this->resolveSceneRuleAttributes($originRules);
+        $attributes = $this->hasScene()
+            ? $this->mergeRules($validatable)
+            : $validatable->rules();
 
         return array_reduce($attributes, function (array $rules, string $field) use ($validatable): array {
 
