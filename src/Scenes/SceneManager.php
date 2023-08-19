@@ -41,6 +41,10 @@ final class SceneManager implements SceneValidatable
 
     public function withRule(array|string $rule): Scene
     {
+        if (is_string($rule)) {
+            $rule = [$rule];
+        }
+
         $this->resource->extra($rule);
 
         return $this;
