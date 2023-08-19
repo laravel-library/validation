@@ -9,7 +9,7 @@ use Illuminate\Console\GeneratorCommand;
 class ValidatorCommand extends GeneratorCommand
 {
 
-    protected $signature = 'make:validator';
+    protected $name = 'make:validator';
 
     protected $description = 'Create a new request validator.';
 
