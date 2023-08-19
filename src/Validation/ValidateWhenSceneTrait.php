@@ -59,8 +59,8 @@ trait ValidateWhenSceneTrait
 
     private function replaceRules(): array
     {
-        if (!class_implements($this, ValidateWhenScene::class)) {
-            throw new ValidationInheritanceException('class [' . get_called_class() . ' must be inheritance]' . ValidationInheritanceException::class);
+        if (!is_subclass_of($this, ValidateWhenScene::class)) {
+            throw new ValidationInheritanceException('class [' . get_called_class() . '] must be inheritance ' . ValidationInheritanceException::class);
         }
 
         return $this->scene->replaceRules($this);
