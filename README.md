@@ -3,7 +3,7 @@
 
 ##### Simple install
 ```shell
-$ composer require xgbnl/validator --dev-main
+$ composer require xgbnl/validation dev-main
 ```
 
 ##### Create scene validator
