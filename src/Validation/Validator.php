@@ -48,7 +48,7 @@ abstract class Validator extends FormRequest implements Validatable, Scene
 
     public function validateForm(): Resourceable
     {
-        if (!$this->resource->isEmpty()) {
+        if ($this->resource->isNotEmpty()) {
             $this->resource->flush();
         }
 
