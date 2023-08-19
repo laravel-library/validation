@@ -1,6 +1,6 @@
 {
-  "name": "xgbnl/validator",
-  "description": "laravel validator,support scene validate.",
+  "name": "xgbnl/validation",
+  "description": "Scene-based Validator in Laravel.",
   "type": "library",
   "license": "MIT",
   "autoload": {
