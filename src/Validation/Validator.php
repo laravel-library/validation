@@ -48,11 +48,13 @@ abstract class Validator extends FormRequest implements Validatable, Scene
 
     public function validateForm(): DataTransfer
     {
+        $validated = $this->validateRaw();
+
         if ($this->resource->isNotEmpty()) {
             $this->resource->flush();
         }
 
-        return $this->resource->extra($this->validateRaw());
+        return $this->resource->extra($validated);
     }
 
     public function validateRaw(): array
