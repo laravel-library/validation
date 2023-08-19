@@ -4,7 +4,7 @@ namespace Elephant\Validation\Contacts\Resources;
 
 use Closure;
 
-interface Resourceable
+interface DataTransfer
 {
     public function get(string $name): mixed;
 

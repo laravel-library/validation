@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Elephant\Validation\Scenes;
 
-use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Resources\DataTransfer;
 use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\Scene;
@@ -15,9 +15,9 @@ final class SceneManager implements SceneValidatable
 
     protected ?string $scene = null;
 
-    protected readonly Resourceable $resource;
+    protected readonly DataTransfer $resource;
 
-    public function __construct(Resourceable $resource)
+    public function __construct(DataTransfer $resource)
     {
         $this->resource = $resource;
     }

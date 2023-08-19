@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Elephant\Validation;
 
 use Elephant\Validation\Commands\ValidatorCommand;
-use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Resources\DataTransfer;
 use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Resources\FormDataResource;
 use Elephant\Validation\Scenes\SceneManager;
@@ -20,18 +20,16 @@ class ValidationServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->bindings();
-
-        $this->commands($this->commands);
-    }
-
-    protected function bindings(): void
-    {
-        $this->app->singleton(Resourceable::class, fn(): Resourceable => new FormDataResource());
+        $this->app->singleton(DataTransfer::class, fn(): DataTransfer => new FormDataResource());
 
         $this->app->singleton(
             SceneValidatable::class,
             fn(Container $app): SceneValidatable => $app->make(SceneManager::class)
         );
+    }
+
+    public function boot(): void
+    {
+        $this->commands($this->commands);
     }
 }

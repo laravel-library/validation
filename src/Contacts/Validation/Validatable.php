@@ -2,7 +2,7 @@
 
 namespace Elephant\Validation\Contacts\Validation;
 
-use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Resources\DataTransfer;
 
 interface Validatable
 {
@@ -12,7 +12,7 @@ interface Validatable
 
     public function hasRuleMethod(string $name): bool;
 
-    public function validateForm(): Resourceable;
+    public function validateForm(): DataTransfer;
 
     public function validateRaw(): array;
 }

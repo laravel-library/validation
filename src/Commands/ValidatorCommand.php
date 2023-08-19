@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elephant\Validation\Commands;
 
 use Illuminate\Console\GeneratorCommand;
@@ -11,9 +13,11 @@ class ValidatorCommand extends GeneratorCommand
 
     protected $description = 'Create a new request validator.';
 
+    protected $type = 'validator';
+
     protected function getStub(): string
     {
-        return __DIR__ . '/stubs/validator.stub';
+        return __DIR__ . '/stubs/' . $this->type . '.stub';
     }
 
     protected function getDefaultNamespace($rootNamespace): string

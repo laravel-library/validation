@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Elephant\Validation\Validation;
 
 use Exception;
-use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Resources\DataTransfer;
 use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\Scene;
@@ -18,14 +18,14 @@ abstract class Validator extends FormRequest implements Validatable, Scene
 {
     use ValidateWhenSceneTrait;
 
-    protected readonly Resourceable $resource;
+    protected readonly DataTransfer $resource;
 
     protected readonly SceneValidatable $scene;
 
     private bool $autoValidate;
 
     public function __construct(
-        Resourceable     $resource,
+        DataTransfer     $resource,
         SceneValidatable $scene,
         array            $query = [],
         array            $request = [],
@@ -46,7 +46,7 @@ abstract class Validator extends FormRequest implements Validatable, Scene
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
     }
 
-    public function validateForm(): Resourceable
+    public function validateForm(): DataTransfer
     {
         if ($this->resource->isNotEmpty()) {
             $this->resource->flush();

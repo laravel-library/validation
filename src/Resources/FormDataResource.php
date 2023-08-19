@@ -3,9 +3,9 @@
 namespace Elephant\Validation\Resources;
 
 use Closure;
-use Elephant\Validation\Contacts\Resources\Resourceable;
+use Elephant\Validation\Contacts\Resources\DataTransfer;
 
-final class FormDataResource implements Resourceable
+final class FormDataResource implements DataTransfer
 {
     protected array $fromData;
 
@@ -19,14 +19,14 @@ final class FormDataResource implements Resourceable
         return $this->fromData[$name];
     }
 
-    public function except(array $attribute): Resourceable
+    public function except(array $attribute): DataTransfer
     {
         $this->fromData = $this->filterFromData(fn(mixed $value, string $key): bool => !in_array($value, $attribute));
 
         return $this;
     }
 
-    public function filter(Closure $closure = null): Resourceable
+    public function filter(Closure $closure = null): DataTransfer
     {
         $this->fromData = $closure instanceof Closure
             ? $this->filterFromData($closure)
@@ -45,7 +45,7 @@ final class FormDataResource implements Resourceable
         return $this->fromData;
     }
 
-    public function extra(array $values): Resourceable
+    public function extra(array $values): DataTransfer
     {
         $this->fromData = $this->isNotEmpty() ? array_merge($this->fromData, $values) : $values;
 
