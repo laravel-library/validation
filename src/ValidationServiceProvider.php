@@ -27,7 +27,7 @@ class ValidationServiceProvider extends ServiceProvider
 
     protected function bindings(): void
     {
-        $this->app->bind(Resourceable::class, fn(): Resourceable => new FormDataResource());
+        $this->app->singleton(Resourceable::class, fn(): Resourceable => new FormDataResource());
 
         $this->app->singleton(
             SceneValidatable::class,
