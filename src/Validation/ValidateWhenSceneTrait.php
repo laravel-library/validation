@@ -6,6 +6,7 @@ use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 use Elephant\Validation\Exception\ValidationInheritanceException;
+use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator as AbstractValidator;
 
@@ -48,22 +49,16 @@ trait ValidateWhenSceneTrait
 
     private function prepareValidateRules(): array
     {
-        $rules = $this->scene->hasRule()
-            ? $this->scene->merge($this)
-            : $this->rules();
-
-        return $this->scene->hasScene()
-            ? $this->replaceRules()
-            : $rules;
+        return $this->scene->hasScene() ? $this->replaceRules() : $this->rules();
     }
 
     private function replaceRules(): array
     {
         if (!is_subclass_of($this, ValidateWhenScene::class)) {
-            throw new ValidationInheritanceException('class [' . get_called_class() . '] must be inheritance ' . ValidationInheritanceException::class);
+            throw new ValidationInheritanceException('class [' . get_called_class() . '] must be inheritance ' . ValidatesWhenResolved::class);
         }
 
-        return $this->scene->replaceRules($this);
+        return $this->scene->refreshRules($this);
     }
 
 }

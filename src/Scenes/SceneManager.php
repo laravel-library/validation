@@ -50,9 +50,11 @@ final class SceneManager implements SceneValidatable
         return $this;
     }
 
-    public function replaceRules(Validatable|Scene|ValidateWhenScene $validatable): array
+    public function refreshRules(Validatable|Scene|ValidateWhenScene $validatable): array
     {
-        $attributes = $this->resolveSceneRuleAttributes($validatable->scenes());
+        $originRules = $this->hasRule() ? $this->mergeRules($validatable) : $validatable->rules();
+
+        $attributes = $this->resolveSceneRuleAttributes($originRules);
 
         return array_reduce($attributes, function (array $rules, string $field) use ($validatable): array {
 
@@ -73,7 +75,7 @@ final class SceneManager implements SceneValidatable
             : $attributes;
     }
 
-    public function merge(Validatable|ValidateWhenScene|Scene $validatable): array
+    public function mergeRules(Validatable|ValidateWhenScene|Scene $validatable): array
     {
         return array_merge($validatable->rules(), $this->getRules($validatable));
     }
