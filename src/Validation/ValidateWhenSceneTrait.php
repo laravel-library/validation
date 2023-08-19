@@ -3,6 +3,7 @@
 namespace Elephant\Validation\Validation;
 
 use Elephant\Validation\Contacts\Validation\Scene;
+use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 use Elephant\Validation\Exception\ValidationInheritanceException;
 use Illuminate\Validation\Factory;
@@ -11,14 +12,14 @@ use Illuminate\Validation\Validator as AbstractValidator;
 trait ValidateWhenSceneTrait
 {
 
-    final public function withRule(string $rule): Scene
+    final public function withRule(string $rule): Scene|Validatable
     {
         $this->scene->withRule($rule);
 
         return $this;
     }
 
-    final public function withScene(string $scene): Scene
+    final public function withScene(string $scene): Scene|Validatable
     {
         $this->scene->withScene($scene);
 
