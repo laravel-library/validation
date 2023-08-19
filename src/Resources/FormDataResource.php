@@ -47,18 +47,23 @@ final class FormDataResource implements Resourceable
 
     public function extra(array $values): Resourceable
     {
-        $this->fromData = $this->isEmpty() ? $values : array_merge($this->fromData, $values);
+        $this->fromData = $this->isNotEmpty() ? array_merge($this->fromData, $values) : $values;
 
         return $this;
     }
 
-    public function isEmpty(): bool
+    public function isNotEmpty(): bool
     {
-        return empty($this->fromData);
+        return !empty($this->fromData);
     }
 
     public function flush(): void
     {
         $this->fromData = [];
+    }
+
+    public function has(string $name): bool
+    {
+        return isset($this->fromData[$name]);
     }
 }

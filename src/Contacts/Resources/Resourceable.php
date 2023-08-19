@@ -14,7 +14,9 @@ interface Resourceable
 
     public function values(): array;
 
-    public function isEmpty(): bool;
+    public function isNotEmpty(): bool;
+
+    public function has(string $name): bool;
 
     public function extra(array $values): self;
 
