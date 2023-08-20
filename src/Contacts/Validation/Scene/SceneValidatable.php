@@ -10,7 +10,7 @@ interface SceneValidatable extends ValidateWhenScene
 {
     public function refreshRules(Validatable|Scene|ValidateWhenScene $validatable): array;
 
-    public function mergeRules(Validatable|Scene|ValidateWhenScene $validatable): array;
+    public function mergeRules(Validatable|ValidateWhenScene $validatable): array;
 
     public function hasRule(): bool;
 
