@@ -25,7 +25,7 @@ public function scenes():array
 // call
 public function store(UserValidator $userValidator):mixed
 {
-    $userValidator->withScene('store')->validatedForm(); // returns ResourceDTO
+    $userValidator->withScene('store')->validatedForm(); // returns DataTransfer
     
     $userValidator->withScene('update')->validatedRaw(); // returns array
     
