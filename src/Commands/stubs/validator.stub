@@ -4,9 +4,12 @@ namespace DummyNamespace;
 
 use Elephant\Validation\Validation\Validator;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Validation;
 
 final class DummyClass extends Validator implements ValidateWhenScene
 {
+    use SceneTrait;
+
     /**
      * Determine if the user is authorized to make this request.
      */
