@@ -22,16 +22,6 @@ final class SceneManager implements SceneValidatable
         $this->resource = $resource;
     }
 
-    public function hasRule(): bool
-    {
-        return $this->resource->isNotEmpty();
-    }
-
-    public function hasScene(): bool
-    {
-        return !empty($this->scene);
-    }
-
     public function withScene(string $scene): ValidateWhenScene
     {
         $this->scene = $scene;
@@ -52,37 +42,24 @@ final class SceneManager implements SceneValidatable
 
     public function refreshRules(Validatable|ValidateWhenScene|Scene $validatable): array
     {
-        $resolvedRules = $this->getSceneValidateFields($validatable->scenes());
+        $rules = $this->hasRule() ? $this->mergeRules($validatable) : $validatable->rules();
 
-        $attributes = $this->hasScene()
-            ? $this->mergeRules($validatable)
-            : $validatable->rules();
-
-        return array_reduce($attributes, function (array $rules, string $field) use ($validatable): array {
-
-            if ($validatable->hasRule($field)) {
-                $rules[$field] = $validatable->rules()[$field];
-            }
-
-            return $rules;
-        }, []);
+        return ($this->hasScene() && $validatable->hasScene($this->scene))
+            ? $this->getSceneRules($validatable->getScene($this->scene), $rules)
+            : $rules;
     }
 
-    protected function getSceneValidateFields(Scene $whenScene): array
+    public function hasRule(): bool
     {
-        $attributes = $whenScene->scenes()[$this->scene] ?? [];
-
-        return is_string($attributes)
-            ? explode(',', $attributes)
-            : $attributes;
+        return $this->resource->isNotEmpty();
     }
 
-    public function mergeRules(Validatable|Scene|ValidateWhenScene $validatable): array
+    public function mergeRules(Validatable|ValidateWhenScene $validatable): array
     {
         return array_merge($validatable->rules(), $this->getRules($validatable));
     }
 
-    protected function getRules(Validatable|Scene|ValidateWhenScene $validatable): array
+    protected function getRules(Validatable|ValidateWhenScene $validatable): array
     {
         return array_reduce($this->resource->values(), function (array $extendRules, string $method) use ($validatable): array {
 
@@ -93,6 +70,23 @@ final class SceneManager implements SceneValidatable
             }
 
             return $extendRules;
+        }, []);
+    }
+
+    public function hasScene(): bool
+    {
+        return !empty($this->scene);
+    }
+
+    protected function getSceneRules(array $attributes, array $rules): array
+    {
+        return array_reduce($attributes, function (array $carry, string $attribute) use ($rules): array {
+
+            if (array_key_exists($attribute, $rules)) {
+                $carry[$attribute] = $rules[$attribute];
+            }
+
+            return $carry;
         }, []);
     }
 }
