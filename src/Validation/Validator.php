@@ -8,13 +8,13 @@ use Exception;
 use Elephant\Validation\Contacts\Resources\DataTransfer;
 use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
-use Elephant\Validation\Contacts\Validation\Scene;
+use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\Validator as ValidatorContacts;
 
-abstract class Validator extends FormRequest implements Validatable, Scene
+abstract class Validator extends FormRequest implements Validatable, ValidateWhenScene
 {
     use ValidateWhenSceneTrait;
 

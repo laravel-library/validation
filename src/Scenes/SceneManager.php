@@ -7,8 +7,8 @@ namespace Elephant\Validation\Scenes;
 use Elephant\Validation\Contacts\Resources\DataTransfer;
 use Elephant\Validation\Contacts\Validation\Scene\SceneValidatable;
 use Elephant\Validation\Contacts\Validation\Validatable;
-use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Contacts\Validation\Scene;
 
 final class SceneManager implements SceneValidatable
 {
@@ -32,14 +32,14 @@ final class SceneManager implements SceneValidatable
         return !empty($this->scene);
     }
 
-    public function withScene(string $scene): Scene
+    public function withScene(string $scene): ValidateWhenScene
     {
         $this->scene = $scene;
 
         return $this;
     }
 
-    public function withRule(array|string $rule): Scene
+    public function withRule(array|string $rule): ValidateWhenScene
     {
         if (is_string($rule)) {
             $rule = [$rule];
@@ -50,9 +50,9 @@ final class SceneManager implements SceneValidatable
         return $this;
     }
 
-    public function refreshRules(Validatable|Scene|ValidateWhenScene $validatable): array
+    public function refreshRules(Validatable|ValidateWhenScene|Scene $validatable): array
     {
-        $resolvedRules = $this->resolveSceneRuleAttributes($validatable->scenes());
+        $resolvedRules = $this->getSceneValidateFields($validatable->scenes());
 
         $attributes = $this->hasScene()
             ? $this->mergeRules($validatable)
@@ -68,21 +68,21 @@ final class SceneManager implements SceneValidatable
         }, []);
     }
 
-    protected function resolveSceneRuleAttributes(array $scenes): array
+    protected function getSceneValidateFields(Scene $whenScene): array
     {
-        $attributes = $scenes[$this->scene];
+        $attributes = $whenScene->scenes()[$this->scene] ?? [];
 
         return is_string($attributes)
             ? explode(',', $attributes)
             : $attributes;
     }
 
-    public function mergeRules(Validatable|ValidateWhenScene|Scene $validatable): array
+    public function mergeRules(Validatable|Scene|ValidateWhenScene $validatable): array
     {
         return array_merge($validatable->rules(), $this->getRules($validatable));
     }
 
-    protected function getRules(Validatable|ValidateWhenScene|Scene $validatable): array
+    protected function getRules(Validatable|Scene|ValidateWhenScene $validatable): array
     {
         return array_reduce($this->resource->values(), function (array $extendRules, string $method) use ($validatable): array {
 

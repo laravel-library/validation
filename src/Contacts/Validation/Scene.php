@@ -4,7 +4,8 @@ namespace Elephant\Validation\Contacts\Validation;
 
 interface Scene
 {
-    public function withScene(string $scene): Scene|Validatable;
 
-    public function withRule(string $rule): Scene|Validatable;
+    public function hasScene(string $scene): bool;
+
+    public function scenes(): array;
 }

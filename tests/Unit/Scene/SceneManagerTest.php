@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Scene;
 
-use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Contacts\Validation\Scene;
 use Koala\Validation\Factory\Contacts\Factory;
 use Koala\Validation\Scenes\SceneManager;
 use Illuminate\Foundation\Application;
@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tests\Unit\Bootstrap;
 
-class SceneManagerTest extends TestCase implements ValidateWhenScene
+class SceneManagerTest extends TestCase implements Scene
 {
     use Bootstrap;
 
@@ -35,5 +35,10 @@ class SceneManagerTest extends TestCase implements ValidateWhenScene
     public function scenes(): array
     {
         // TODO: Implement scenes() method.
+    }
+
+    public function hasScene(string $scene): bool
+    {
+        // TODO: Implement hasScene() method.
     }
 }
