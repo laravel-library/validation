@@ -3,7 +3,8 @@
 namespace DummyNamespace;
 
 use Elephant\Validation\Validation\Validator;
-use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
+use Elephant\Validation\Contacts\Validation\Scene;
+use Elephant\Validation\Validation\SceneTrait;
 use Elephant\Validation\Validation;
 
 final class DummyClass extends Validator implements ValidateWhenScene
