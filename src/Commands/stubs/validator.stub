@@ -8,7 +8,7 @@ use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Validation\SceneTrait;
 use Elephant\Validation\Validation\Validator;
 
-final class DummyClass extends Validator implements ValidateWhenScene
+final class DummyClass extends Validator implements Scene
 {
     use SceneTrait;
 
