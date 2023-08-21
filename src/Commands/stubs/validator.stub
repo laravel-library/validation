@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DummyNamespace;
 
-use Elephant\Validation\Validation\Validator;
 use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Validation\SceneTrait;
-use Elephant\Validation\Validation;
+use Elephant\Validation\Validation\Validator;
 
 final class DummyClass extends Validator implements ValidateWhenScene
 {
