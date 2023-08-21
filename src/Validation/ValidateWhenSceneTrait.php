@@ -27,11 +27,6 @@ trait ValidateWhenSceneTrait
         return $this;
     }
 
-    final public function hasRule(string $attribute): bool
-    {
-        return array_key_exists($attribute, $this->rules());
-    }
-
     final public function hasRuleMethod(string $name): bool
     {
         return method_exists($this, $name);
