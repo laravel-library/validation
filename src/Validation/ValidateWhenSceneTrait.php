@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elephant\Validation\Validation;
 
 use Elephant\Validation\Contacts\Validation\ValidateWhenScene;
 use Elephant\Validation\Contacts\Validation\Validatable;
 use Elephant\Validation\Contacts\Validation\Scene;
 use Elephant\Validation\Exception\ValidationInheritanceException;
-use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator as AbstractValidator;
 
@@ -50,7 +51,7 @@ trait ValidateWhenSceneTrait
     private function replaceRules(): array
     {
         if (!is_subclass_of($this, Scene::class)) {
-            throw new ValidationInheritanceException('class [' . get_called_class() . '] must be inheritance ' . ValidatesWhenResolved::class);
+            throw new ValidationInheritanceException('class [' . get_called_class() . '] must be inheritance ' . Scene::class);
         }
 
         return $this->scene->refreshRules($this);
