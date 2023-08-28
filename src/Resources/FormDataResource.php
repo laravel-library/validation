@@ -64,8 +64,21 @@ final class FormDataResource implements DataTransfer
         $this->fromData = [];
     }
 
+    public function equal(string $name, mixed $expected): bool
+    {
+        if (!$this->has($name)) {
+            return false;
+        }
+
+        if ($expected instanceof Closure) {
+            return $expected($this->fromData[$name]);
+        }
+
+        return $this->fromData[$name] === $expected;
+    }
+
     public function has(string $name): bool
     {
-        return isset($this->fromData[$name]);
+        return isset($this->fromData[$name]) && !empty($this->fromData[$name]);
     }
 }

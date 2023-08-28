@@ -16,6 +16,8 @@ interface DataTransfer
 
     public function isNotEmpty(): bool;
 
+    public function equal(string $name,mixed $expected): bool;
+
     public function has(string $name): bool;
 
     public function extra(array $values): self;
