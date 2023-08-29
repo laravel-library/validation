@@ -13,7 +13,7 @@ $ php artisan make:validator UserValidator
 
 ##### Define validation scenarios
 ```php
-// define
+//  Add a validation scene to the authenticator.
 public function scenes():array
 {
     return [
@@ -22,7 +22,7 @@ public function scenes():array
     ];
 }
 
-// call
+// The custom scene is invoked in Controller.
 public function store(UserValidator $userValidator):mixed
 {
     $userValidator->withScene('store')->validatedForm(); // returns DataTransfer
@@ -35,7 +35,7 @@ public function store(UserValidator $userValidator):mixed
 
 ##### Extend the custom validation rule method
 ```php
-// define rule method
+// Add a password validation rule to the authenticator.
 public function passwordRules():array
 {
     return [
@@ -44,7 +44,7 @@ public function passwordRules():array
     ];
 }
 
-// use
+// The custom rule is invoked in Controller.
 public function update(UserValidator $userValidator):mixed
 {
     $userValidator->withScene('update')
@@ -53,5 +53,4 @@ public function update(UserValidator $userValidator):mixed
         
     // do something...
 }
-
 ```
