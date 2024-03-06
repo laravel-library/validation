@@ -15,6 +15,10 @@ trait SceneTrait
     {
         $attributes = $this->scenes()[$scene];
 
-        return is_string($attributes) ? explode(',', $attributes) : $attributes;
+        if (is_string($attributes)) {
+            return str_contains($attributes, ',') ? explode(',', $attributes) : [$attributes];
+        }
+
+        return $attributes;
     }
 }
