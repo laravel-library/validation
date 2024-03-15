@@ -101,7 +101,11 @@ abstract class Validator extends FormRequest implements Validatable, ValidateWhe
 
     private function failedValidationException(Exception $exception): never
     {
-        throw new \Elephant\Validation\Exception\ValidationException(message: $exception->getMessage(), previous: $exception);
+        throw new \Elephant\Validation\Exception\ValidationException(
+            message: $exception instanceof ValidationException
+                ? $exception->validator->errors()->first()
+                : $exception->getMessage(),
+            previous: $exception);
     }
 
     abstract public function rules(): array;
